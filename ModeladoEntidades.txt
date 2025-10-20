@@ -1,0 +1,33 @@
+Videojuego {
+    id: 1, (INT)
+	nombre:"God Of War", (String)
+    tipo: "accion", (String)
+	imagen: "../img" (String)
+	estado: true, (Boolean)
+	precio: 100.00, (FLOAT)
+	plataforma:"PC" (String)
+}
+
+JuegoDeMesa {
+    id: 1, (INT)
+	nombre: "Monopoly",(String)
+	tipo: "cartas/dados/pieza", (String)
+	imagen: "../img", (String)
+	estado: false, (Boolean)
+	precio: 200.00 (Float)
+}
+
+Ticket {
+    id: 1, (INT)
+	comprador: "Roberto", (String)
+	productos: [Videojuego, JuegoDeMesa],
+	total: 30000.00(float),
+    fechaCompra: 2020/10/10, (Date)
+}
+
+Carrito {
+    id: 1, (INT)
+	comprador: "Roberto", (String)
+	productos: [Videojuego, JuegoDeMesa],
+	total: 30000.00(float)	
+}

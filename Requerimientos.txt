@@ -1,0 +1,120 @@
+    Interfaz Visual (Cliente):
+
+Pantalla de bienvenida (X)
+
+Pantalla de Productos (X)
+
+Pantalla de Carrito (X)
+
+Pantalla de Ticket(X)
+
+    Interfaz Visual (Admin):
+
+Pantalla de Login (X)
+
+Pantalla de Dashboard (X)
+
+Pantalla de Alta de Productos (X)
+
+Pantalla de Modificar Producto (X)
+
+
+
+        
+        Requerimientos aplicación Front-end para el cliente / usuario.
+
+
+● El sistema debe preguntar su nombre al usuario al comenzar, sólo cuando se complete, se permitirá ver los
+productos para comprar.
+
+● El sistema debe contar con un nombre de empresa / imagen de empresa. Se pide que las aplicaciones
+front-end cuenten con un favicon.
+
+● El sistema debe tener cargados y mostrados productos variados para ambos tipos de productos al
+momento de ser probada por el cliente (los profesores evaluando). Los productos mostrados deben ser los
+productos que estén activos en ese momento (el producto debe tener la propiedad booleana activo).
+
+Nota: En caso de no tener el backend armado, los productos deben mostrarse tomados desde un JSON
+hardcodeado. Deben estar pensados para 1- mostrarse de forma responsive. 2- mostrarse de forma
+paginada.
+
+● El sistema debe poder persistir en la base de datos el registro de las ventas realizadas exitosamente, junto
+con el nombre del usuario que las efectuó, la fecha y el precio total.
+
+● El sistema debe poder mostrar el ticket de la compra una vez efectuada.
+
+● El sistema debe poder permitir eliminar productos que no se deseen comprar.
+
+● El sistema debe permitir comprar varios de un mismo producto (parámetro cantidad).
+
+● El sistema debe lanzar un modal que pregunte si el cliente quiere confirmar la compra.
+5
+
+● El sistema debe mostrar un botón que permita volver a iniciar el proceso de compra al finalizar y mostrar
+el ticket.
+
+Nota: Recordar que una vez finalizada una compra y entregado el ticket, el sistema se reinicia. Esto es un
+autoservicio, NO un e-commerce.
+
+● El sistema debe permitir descargar el ticket en PDF.
+
+● El sistema debe poder paginar los productos para evitar que estén todos en pantalla al mismo tiempo.
+
+● El sistema debe permitir cambiar el tema de la aplicación (al menos dos, claro y oscuro). Además de
+mantener el tema elegido si se recarga la página.
+
+● El sistema debe poder tener un botón que nos redirija al login del panel del administrador.
+
+● Al momento de testear la aplicación, debe haber suficientes productos activos para poder ver todas las
+funcionalidades.
+
+                         Requerimientos aplicación Back-end.
+
+● El sistema debe mostrar una pantalla login al momento de acceder.
+
+● El login debe funcionar obteniendo los datos del usuario de la base de datos.
+
+● El login debe poseer un botón de acceso rápido. Dicho botón debe autocompletar los input del login
+(correo y contraseña) para facilitar el acceso a esta sección a los testers (los profesores).
+
+Nota: el uso de botones de acceso rápido es una feature muy importante para que los clientes puedan probar
+nuestras aplicaciones de forma rápida y eficaz. Logra que en un ambiente de testing, los tiempos en acciones
+sencillas y repetitivas se recorten para hacer foco en otras funcionalidades.
+
+● Una vez se realiza el login, se redirige a la página que contendrá el panel de administrador.
+
+● El panel de administrador debe mostrar los productos disponibles con sus detalles, separados por tipo.
+
+● El panel debe poder permitir seleccionar un producto y:
+○ Modificar el producto (nombre, precio, imagen).
+○ Desactivar el producto (baja lógica → cambiar el valor de activo a false).
+○ Reactivar el producto (cambiar el valor de activo a true).
+
+● El panel debe poder permitir agregar un nuevo producto a la base de datos. (activo por defecto).
+
+
+                    Requerimientos para el back-end: API en JSON.
+
+● Todas las peticiones deben responder en formato JSON válido.
+
+● Debe poder procesar todas las peticiones de alta, baja, listados y modificación de la base de datos que
+sean necesarias para la correcta funcionalidad de la aplicación (tablas productos, usuarios, ventas y
+cualquier otra que necesiten). Utilizar un ORM.
+
+● Las rutas y los endpoints deben estar bien estructurados y de forma lógica (MVC).
+
+● Debe permitir la carga de imágenes al dar el alta de un producto. Las imágenes se guardan en el servidor.
+
+● La tabla productos y la tabla ventas deben poseer una relación mucho a muchos.
+
+● La creación de un usuario administrador se realiza a través de un endpoint de la API.
+
+● El guardado de las contraseñas de los usuarios debe estar encriptado. NO se guardan contraseñas como
+vienen, se cifran antes de guardarlas.
+
+● Debe permitir traer los productos en forma de páginas (paginación).
+
+● Debe validar todos los datos que recibe a través de middlewares.
+
+● Debe poder devolver el listado de ventas junto con los productos asociados a las mismas.
+
