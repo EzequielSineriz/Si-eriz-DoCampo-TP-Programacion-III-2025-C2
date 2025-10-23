@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DualPlay - Tienda de Juegos</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="productos.css">
+    <link rel="icon" type="image/png" sizes="32x32" href="../img/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../img/favicon/favicon-16x16.png">
+</head>
+<body class="bg-light">
+
+  <!-- Fila 1: Header -->
+  <header class="header py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <img src="../img/LogoEmpresa.png" alt="Logo" class="logo me-3">
+        <h3 class="m-0 text-white">DualPlay</h3>
+      </div>
+      <div class="d-flex align-items-center">
+        <span class="me-3 text-white fw-semibold">Braian Ezequiel Siñeriz <br> Ezequiel Do Campo</span>
+        <a href="admin.html" class="btn btn-outline-light btn-sm me-2">Panel Admin</a>
+        <button id="modoOscuroBtn" class="btn btn-warning btn-sm">🌙</button>
+      </div>
+    </div>
+  </header>
+    <!-- Fila 2: Categorías -->
+  <main class="container my-5">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <div class="card categoria h-100">
+          <img src="../img/card_juegodemesa.jpg" class="card-img-top" alt="Juegos de Mesa">
+          <div class="card-body text-center">
+            <h5 class="card-title">Juegos de Mesa</h5>
+            <p class="card-text">Descubrí clásicos y nuevos desafíos para disfrutar en grupo.</p>
+            <a href="juegosdemesa.html" class="btn btn-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card categoria h-100">
+          <img src="../img/card_videojuegos.jpg" class="card-img-top" alt="Videojuegos y Consolas">
+          <div class="card-body text-center">
+            <h5 class="card-title">Consolas y Videojuegos</h5>
+            <p class="card-text">Explorá lo último en gaming para todas las plataformas.</p>
+            <a href="videojuegos.html" class="btn btn-primary">Ver más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+    <!-- Fila 3: Footer -->
+  <footer class="bg-dark text-white text-center py-3 mt-auto">
+    <p class="m-0">© 2025 DualPlay - Todos los derechos reservados</p>
+  </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script src="productos.js"></script>
+</body>
+</html>
