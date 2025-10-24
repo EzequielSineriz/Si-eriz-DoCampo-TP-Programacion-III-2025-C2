@@ -1,24 +1,10 @@
-const videojuegos = [
-  { id: 1, nombre: "God of War", descripcion: "Aventura épica en el mundo nórdico", precio: 80, stock: true, imagen: "../img/games/godofwar.jpg" },
-  { id: 2, nombre: "Elden Ring", descripcion: "Mundo abierto desafiante", precio: 90, stock: false, imagen: "../img/games/eldenring.jpg" },
-  { id: 3, nombre: "FIFA 25", descripcion: "Simulador de fútbol", precio: 70, stock: true, imagen: "../img/games/fifa25.jpg" },
-  { id: 4, nombre: "Cyberpunk 2077", descripcion: "RPG futurista", precio: 75, stock: true, imagen: "../img/games/cyberpunk.jpg" },
-  { id: 5, nombre: "The Witcher 3", descripcion: "Cacería salvaje", precio: 60, stock: true, imagen: "../img/games/witcher3.jpg" },
-  { id: 6, nombre: "Minecraft", descripcion: "Construye y sobrevive", precio: 40, stock: true, imagen: "../img/games/minecraft.jpg" },
-  { id: 7, nombre: "Halo Infinite", descripcion: "Acción futurista", precio: 85, stock: false, imagen: "../img/games/halo.jpg" },
-  { id: 8, nombre: "GTA V", descripcion: "Mundo abierto", precio: 70, stock: true, imagen: "../img/games/gtav.jpg" },
-  { id: 9, nombre: "Red Dead Redemption 2", descripcion: "Aventura en el oeste", precio: 95, stock: true, imagen: "../img/games/rdr2.jpg" },
-  { id: 10, nombre: "Resident Evil 4", descripcion: "Terror y acción", precio: 85, stock: true, imagen: "../img/games/re4.jpg" },
-  { id: 11, nombre: "Forza Horizon 5", descripcion: "Carreras épicas", precio: 78, stock: true, imagen: "../img/games/forza5.jpg" },
-  { id: 12, nombre: "Assassin's Creed Mirage", descripcion: "Sigilo en Bagdad", precio: 82, stock: true, imagen: "../img/games/acmirage.jpg" },
-  { id: 13, nombre: "Call of Duty MW3", descripcion: "Shooter militar", precio: 88, stock: true, imagen: "../img/games/codmw3.jpg" },
-  { id: 14, nombre: "Spider-Man 2", descripcion: "Superhéroes y acción", precio: 90, stock: true, imagen: "../img/games/spiderman2.jpg" },
-  { id: 15, nombre: "Hogwarts Legacy", descripcion: "Magia y aventuras", precio: 85, stock: true, imagen: "../img/games/hogwarts.jpg" },
-];
-
+// === Variables globales ===
+let videojuegos = [];
 let paginaActual = 1;
 const porPagina = 9;
 let carrito = [];
+
+
 
 // === Referencias DOM ===
 const contenedor = document.getElementById("contenedorVideojuegos");
@@ -26,6 +12,20 @@ const paginacion = document.getElementById("paginacion");
 const buscador = document.getElementById("buscador");
 const buscarBtn = document.getElementById("buscarBtn");
 const modoOscuroBtn = document.getElementById("modoOscuroBtn");
+
+// === Obtener videojuegos desde el backend ===
+async function cargarVideojuegos() {
+  try {
+    const res = await fetch("http://localhost:3000/videojuegos");
+    videojuegos = await res.json();
+    console.log("Lista de videojuegos:", videojuegos);
+    videojuegos.forEach(v => console.log("Imagen:", v.imagen));
+    renderizar(videojuegos);
+  } catch (error) {
+    console.error("Error al cargar videojuegos:", error);
+    contenedor.innerHTML = `<p class="text-danger text-center">Error al cargar los videojuegos.</p>`;
+  }
+}
 
 // === Renderizado ===
 function renderizar(videojuegosFiltrados) {
@@ -46,7 +46,7 @@ function renderizar(videojuegosFiltrados) {
     card.classList.add("col-12", "col-md-6", "col-lg-4");
     card.innerHTML = `
       <div class="card h-100 shadow-sm">
-        <img src="${v.imagen}" class="card-img-top" alt="${v.nombre}">
+        <img src="http://localhost:3000/public${v.imagen}" class="card-img-top" alt="${v.nombre}">
         <div class="card-body text-center d-flex flex-column">
           <h5 class="card-title">${v.nombre}</h5>
           <p class="card-text">${v.descripcion}</p>
@@ -115,7 +115,14 @@ function agregarAlCarrito(id) {
   }
 
   console.log("🛒 Carrito actual:", carrito);
-  alert(`Se agregaron ${cantidad} unidad(es) de ${videojuego.nombre} al carrito.`);
+
+ Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Agregado al carrito",
+  showConfirmButton: false,
+  timer: 1000
+});
 }
 
 // === Modo oscuro ===
@@ -125,9 +132,9 @@ modoOscuroBtn.addEventListener("click", () => {
 });
 
 // === Inicial ===
-renderizar(videojuegos);
+//renderizar(videojuegos);
+cargarVideojuegos();
 
 // === Eventos ===
 buscarBtn.addEventListener("click", filtrar);
 buscador.addEventListener("keyup", filtrar);
-

@@ -20,6 +20,12 @@ body {
   object-fit: contain;
 }
 
+.card-img-top {
+  width: auto;
+  height: 300px;
+  object-fit: cover;
+}
+
 /* Modo oscuro */
 .modo-oscuro {
   background-color: #121212 !important;
