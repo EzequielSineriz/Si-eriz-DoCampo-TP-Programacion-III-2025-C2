@@ -13,7 +13,8 @@ const Videojuego = require("../models/videoJuegos.js");
  */
 router.post("/", async (req, res) => {
   try {
-    console.log(req.body);
+    console.log(req.body); // para saber que llega por el body
+
     // 1. Tomar datos.
     const body = req.body;
 
@@ -24,7 +25,7 @@ router.post("/", async (req, res) => {
     const imagen = body.imagen;
 
 
-    // const { marca, precio, fechaDeLanzamiento } = req.body;
+    // const { nombre, descripcion, precio, stock, imagen} = req.body;
 
     // 2. Hacer algo con los datos.
     const resultado = await Videojuego.create({
@@ -59,7 +60,7 @@ router.get("/", async (req, res) => {
 });
 
 /**
- * Espera que el id venga en parámetro de ruta
+ * Espera que el id venga en parametro de ruta
  */
 router.get("/:id", async (req, res) => {
   try {

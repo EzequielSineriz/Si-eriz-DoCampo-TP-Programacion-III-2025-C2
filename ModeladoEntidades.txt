@@ -1,20 +1,19 @@
-Videojuego {
-    id: 1, (INT)
-	nombre:"God Of War", (String)
-    tipo: "accion", (String)
-	imagen: "../img" (String)
-	estado: true, (Boolean)
-	precio: 100.00, (FLOAT)
-	plataforma:"PC" (String)
-}
+Videojuego{
+        "id": 1,
+        "nombre": "GOD",
+        "descripcion": "NaN",
+        "precio": 100,
+        "stock": true,
+        "imagen": "/God.jpg",
+		}
 
 JuegoDeMesa {
-    id: 1, (INT)
-	nombre: "Monopoly",(String)
-	tipo: "cartas/dados/pieza", (String)
-	imagen: "../img", (String)
-	estado: false, (Boolean)
-	precio: 200.00 (Float)
+        "id": 1,
+        "nombre": "Monopoly",
+        "descripcion": "Estrategia",
+        "precio": 100,
+        "stock": true,
+        "imagen": "/Monopoly.jpg",
 }
 
 Ticket {

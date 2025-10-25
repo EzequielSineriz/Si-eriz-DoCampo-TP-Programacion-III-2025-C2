@@ -5,7 +5,8 @@
     "express": "^5.1.0",
     "mysql2": "^3.15.2",
     "sequelize": "^6.37.7",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "zod": "^4.1.12"
   },
   "name": "back",
   "version": "1.0.0",

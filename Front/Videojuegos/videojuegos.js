@@ -19,7 +19,7 @@ async function cargarVideojuegos() {
     const res = await fetch("http://localhost:3000/videojuegos");
     videojuegos = await res.json();
     console.log("Lista de videojuegos:", videojuegos);
-    videojuegos.forEach(v => console.log("Imagen:", v.imagen));
+    videojuegos.forEach(v => console.log("Imagen:", v.imagen)); // para saber donde apunta la imagen
     renderizar(videojuegos);
   } catch (error) {
     console.error("Error al cargar videojuegos:", error);
@@ -88,7 +88,7 @@ function filtrar() {
   const texto = buscador.value.toLowerCase().trim();
   const filtrados = videojuegos.filter(v => v.nombre.toLowerCase().includes(texto));
 
-  // Reinicia la página si se hace una nueva búsqueda
+  // Reinicia la pagina si se hace una nueva busqueda
   if (paginaActual > Math.ceil(filtrados.length / porPagina)) {
     paginaActual = 1;
   }
@@ -114,7 +114,7 @@ function agregarAlCarrito(id) {
     carrito.push({ ...videojuego, cantidad });
   }
 
-  console.log("🛒 Carrito actual:", carrito);
+  console.log("Carrito actual:", carrito);
 
  Swal.fire({
   position: "top-end",
