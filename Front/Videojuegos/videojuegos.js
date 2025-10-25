@@ -124,8 +124,9 @@ function agregarAlCarrito(id) {
   timer: 1000
 });
 }
- // modo oscuro
- 
+
+// modo oscuro
+
 const btnModoOscuro = document.getElementById("modoOscuroBtn");
 const body = document.body;
 
@@ -143,16 +144,6 @@ btnModoOscuro.addEventListener("click", () => {
   btnModoOscuro.textContent = modoOscuroActivo ? "🌑" : "🌙";
 });
 
-boton.addEventListener("click", function() {
-    const error = document.getElementById("error");
-    if (input.value.length < 3 || input.value.length > 11) {
-        error.textContent = "El nombre debe tener entre 3 y 11 caracteres";
-    }
-    else {
-        localStorage.setItem("nombre", input.value);
-        window.location.href = "../Productos/productos.html";
-    }
-});
 
 // === Inicial ===
 //renderizar(videojuegos);
