@@ -124,11 +124,34 @@ function agregarAlCarrito(id) {
   timer: 1000
 });
 }
+ // modo oscuro
+ 
+const btnModoOscuro = document.getElementById("modoOscuroBtn");
+const body = document.body;
 
-// === Modo oscuro ===
-modoOscuroBtn.addEventListener("click", () => {
-  document.body.classList.toggle("modo-oscuro");
-  modoOscuroBtn.textContent = document.body.classList.contains("modo-oscuro") ? "☀️" : "🌙";
+if (localStorage.getItem("modoOscuro") === "true") {
+  body.classList.add("modo-oscuro");
+  btnModoOscuro.textContent = "🌑";
+}
+
+btnModoOscuro.addEventListener("click", () => {
+  body.classList.toggle("modo-oscuro");
+
+  const modoOscuroActivo = body.classList.contains("modo-oscuro");
+  localStorage.setItem("modoOscuro", modoOscuroActivo);
+
+  btnModoOscuro.textContent = modoOscuroActivo ? "🌑" : "🌙";
+});
+
+boton.addEventListener("click", function() {
+    const error = document.getElementById("error");
+    if (input.value.length < 3 || input.value.length > 11) {
+        error.textContent = "El nombre debe tener entre 3 y 11 caracteres";
+    }
+    else {
+        localStorage.setItem("nombre", input.value);
+        window.location.href = "../Productos/productos.html";
+    }
 });
 
 // === Inicial ===
@@ -138,3 +161,4 @@ cargarVideojuegos();
 // === Eventos ===
 buscarBtn.addEventListener("click", filtrar);
 buscador.addEventListener("keyup", filtrar);
+
