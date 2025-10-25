@@ -64,3 +64,11 @@ section {
 }
 
 
+#error{
+    color: red;
+}
+
+body.modo-oscuro .header,
+body.modo-oscuro .footer {
+  background-color: rgba(30, 30, 30, 0.95);
+}
