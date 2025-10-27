@@ -17,17 +17,6 @@ btnModoOscuro.addEventListener("click", () => {
   btnModoOscuro.textContent = modoOscuroActivo ? "🌑" : "🌙";
 });
 
-boton.addEventListener("click", function() {
-    const error = document.getElementById("error");
-    if (input.value.length < 3 || input.value.length > 11) {
-        error.textContent = "El nombre debe tener entre 3 y 11 caracteres";
-    }
-    else {
-        localStorage.setItem("nombre", input.value);
-        window.location.href = "../Productos/productos.html";
-    }
-});
-
 const saludo = document.getElementById("saludo");
 const nombre = localStorage.getItem("nombre") || "Invitado";
 saludo.textContent = "Bienvenido, " + nombre;
