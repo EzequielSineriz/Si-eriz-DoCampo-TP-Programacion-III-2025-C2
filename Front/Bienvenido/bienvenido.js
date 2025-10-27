@@ -1,5 +1,6 @@
 const input = document.getElementById("input");
 const boton = document.getElementById("boton");
+input.textContent = "";
 
 // modo oscuro
 const btnModoOscuro = document.getElementById("modoOscuroBtn");
@@ -7,7 +8,7 @@ const body = document.body;
 
 if (localStorage.getItem("modoOscuro") === "true") {
   body.classList.add("modo-oscuro");
-  btnModoOscuro.textContent = "🌑";
+  btnModoOscuro.textContent = "🌙";
 }
 
 btnModoOscuro.addEventListener("click", () => {
@@ -16,7 +17,7 @@ btnModoOscuro.addEventListener("click", () => {
   const modoOscuroActivo = body.classList.contains("modo-oscuro");
   localStorage.setItem("modoOscuro", modoOscuroActivo);
 
-  btnModoOscuro.textContent = modoOscuroActivo ? "🌑" : "🌙";
+  btnModoOscuro.textContent = modoOscuroActivo ? "🌙" : "☀️";
 });
 
 boton.addEventListener("click", function() {

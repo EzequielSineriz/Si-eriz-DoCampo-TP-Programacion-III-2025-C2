@@ -69,8 +69,18 @@ section {
 }
 
 body.modo-oscuro .header,
-body.modo-oscuro .footer {
+body.modo-oscuro .footer{
   background-color: rgba(30, 30, 30, 0.95);
+}
+
+body.modo-oscuro .input{
+  background-color: rgba(30, 30, 30, 0.95);
+  color: aliceblue;
+
+}
+
+body.modo-oscuro ::placeholder{
+  color: aliceblue; 
 }
 
 @media (max-width: 425px) {
