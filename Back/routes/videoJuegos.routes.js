@@ -1,40 +1,28 @@
-// Rutas para la entidad Videojuego (CRUD)
 const express = require("express");
 const router = express.Router();
-const Videojuego = require("../models/videoJuegos.js");
-const { crearVideojuego, traerVideojuegos, traerVideojuegosPorId, actualizarVideojuego, eliminarVideojuego} = require("../controllers/videojuego.controller.js");
-const {validarVideojuego, validarVideojuegoId} = require("../middleware/videojuegos.mw.js");
 
+const {
+  crearVideojuego,
+  traerVideojuegos,
+  traerVideojuegosPorId,
+  actualizarVideojuego,
+  eliminarVideojuego
+} = require("../controllers/videojuego.controller.js");
 
+const { validarVideojuego, validarVideojuegoId } =
+  require("../middleware/videojuegos.middleware.js");
 
-//         == POST ==
-// Aplica la validación antes de crear un videojuego
-router.post("/", validarVideojuegoId);
-router.post("/", validarVideojuego);
-// POST /videojuegos - crear un nuevo videojuego
-router.post("/", crearVideojuego);
+// POST
+router.post("/", validarVideojuego, crearVideojuego);
 
-
-//          == GET ==
-//Valido Id antes de traer un videojuego
-//router.get("/", validarVideojuegoId);
-// GET /videojuegos - obtener todos los videojuegos
+// GET
 router.get("/", traerVideojuegos);
-//Valido Id antes de traer un videojuego
-router.get("/", validarVideojuegoId);
-// GET /videojuegos/:id - obtener un videojuego por su ID
-router.get("/:id", traerVideojuegosPorId);
+router.get("/:id", validarVideojuegoId, traerVideojuegosPorId);
 
-//            == PUT ==
-// Valido Id antes de actualizar un videojuego
-router.put("/:id", validarVideojuegoId);
-router.put("/:id", validarVideojuego);
-// PUT /videojuegos/:id - actualizar un videojuego
-router.put("/:id", actualizarVideojuego);
+// PUT
+router.put("/:id", validarVideojuegoId, validarVideojuego, actualizarVideojuego);
 
-// Valido Id antes de eliminar un videojuego
-router.delete("/:id", validarVideojuegoId);
-// DELETE /videojuegos/:id - eliminar un videojuego
-router.delete("/:id", eliminarVideojuego);
+// DELETE
+router.delete("/:id", validarVideojuegoId, eliminarVideojuego);
 
 module.exports = router;
