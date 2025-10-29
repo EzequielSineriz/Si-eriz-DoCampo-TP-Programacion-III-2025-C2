@@ -52,17 +52,19 @@ body.modo-oscuro ::placeholder{
   color: gray; 
 }
 
-#btnVolver{
+#btnVolver, #btnCarrito{
   background-color: white;
   color: black;
 }
 
-body.modo-oscuro #btnVolver{
+body.modo-oscuro #btnVolver,
+body.modo-oscuro #btnCarrito{
   background-color: rgba(30, 30, 30, 0.95);
   color: gray;
 }
 
-#btnVolver:hover {
-  background-color: #eaeaea !important;
+#btnVolver:hover,
+#btnCarrito:hover{
+  background-color: #a09d9d !important;
   color: #121212 !important;
 }
