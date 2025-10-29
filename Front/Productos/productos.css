@@ -11,10 +11,10 @@ body {
 }
 
 main{
-  margin: 0;                      
+  margin: 0;
+  padding-top: 75px;                
   display: flex;      
-  height: 70vh;         
-  justify-content: center;        
+  height: 65vh;             
   align-items: center;
   flex-direction: column;
   color: whitesmoke;
@@ -79,12 +79,20 @@ body.modo-oscuro .btn-primary {
   background-color: #0d6efd;
 }
 
-body.modo-oscuro .btn-outline-light {
-  border-color: #eaeaea;
-  color: #eaeaea;
+#btnVolver{
+  background-color: white;
+  color: black;
+  margin-left: 410px;
+  margin-top: 24px;
 }
 
-body.modo-oscuro .btn-outline-light:hover {
-  background-color: #eaeaea;
-  color: #121212;
+body.modo-oscuro #btnVolver{
+  background-color: rgba(30, 30, 30, 0.95);
+  color: gray;
 }
+
+#btnVolver:hover {
+  background-color: #eaeaea !important;
+  color: #121212 !important;
+}
+

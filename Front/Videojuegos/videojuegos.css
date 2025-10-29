@@ -41,3 +41,28 @@ body {
 .modo-oscuro .header {
   background-color: rgba(30, 30, 30, 0.95);
 }
+
+body.modo-oscuro #buscador{
+  background-color: rgba(30, 30, 30, 0.95);
+  color: white;
+
+}
+
+body.modo-oscuro ::placeholder{
+  color: gray; 
+}
+
+#btnVolver{
+  background-color: white;
+  color: black;
+}
+
+body.modo-oscuro #btnVolver{
+  background-color: rgba(30, 30, 30, 0.95);
+  color: gray;
+}
+
+#btnVolver:hover {
+  background-color: #eaeaea !important;
+  color: #121212 !important;
+}

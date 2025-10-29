@@ -37,7 +37,7 @@ main {
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  color: whitesmoke;
+  color: white;
 }
 
 section {
@@ -75,12 +75,12 @@ body.modo-oscuro .footer{
 
 body.modo-oscuro .input{
   background-color: rgba(30, 30, 30, 0.95);
-  color: aliceblue;
+  color: white;
 
 }
 
 body.modo-oscuro ::placeholder{
-  color: aliceblue; 
+  color: gray; 
 }
 
 @media (max-width: 425px) {

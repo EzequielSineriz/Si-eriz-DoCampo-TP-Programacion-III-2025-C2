@@ -2,7 +2,6 @@
 let videojuegos = [];
 let paginaActual = 1;
 const porPagina = 9;
-let carrito = [];
 
 
 
@@ -105,15 +104,24 @@ function agregarAlCarrito(id) {
     c.querySelector("h5").textContent === videojuego.nombre
   );
 
+  let carrito = JSON.parse(localStorage.getItem("carritoVideojuegos")) || [];
+
   const cantidad = parseInt(card.querySelector(".cantidad").value);
+
   const existente = carrito.find(item => item.id === id);
 
   if (existente) {
     existente.cantidad += cantidad;
-  } else {
-    carrito.push({ ...videojuego, cantidad });
+  } 
+  
+  else {
+    carrito.push({
+      id: videojuego.id,
+      cantidad: cantidad
+    });
   }
 
+  localStorage.setItem("carritoVideojuegos", JSON.stringify(carrito));
   console.log("Carrito actual:", carrito);
 
  Swal.fire({
