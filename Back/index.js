@@ -22,7 +22,8 @@ app.use(express.json());
 const videojuegosRoutes = require("./routes/videoJuegos.routes.js");
 app.use("/videojuegos", videojuegosRoutes);
 
-
+const juegosDeMesaRoutes = require("./routes/juegoDeMesa.routes.js");
+app.use("/juegosdemesa", juegosDeMesaRoutes);
 
 // Sincronizar base de datos y levantar servidor
 sequelize.sync().then(() => {
