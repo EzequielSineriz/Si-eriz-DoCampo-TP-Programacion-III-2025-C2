@@ -5,6 +5,13 @@ const sequelize = require("./db/sequelize");
 const path = require("path"); // 👈 Importar el modulo path
 const app = express();
 
+// Configurar EJS como motor de vistas
+//let ejs = require('ejs');
+app.set('view engine', 'ejs');
+
+// Usar ruta absoluta para evitar problemas según desde dónde se inicie el proceso
+app.set('views', path.join(__dirname, 'views'));
+
 
 //                       === Middleware ===
 
@@ -22,8 +29,16 @@ app.use(express.json());
 const videojuegosRoutes = require("./routes/videoJuegos.routes.js");
 app.use("/videojuegos", videojuegosRoutes);
 
+<<<<<<< HEAD
+app.get("/", (req, res) => {
+  // Renderizo mi vista index.ejs
+  //   res.send("<h1>Hola</h1>");
+  res.render("layout", { path: "index" });
+});
+=======
 const juegosDeMesaRoutes = require("./routes/juegoDeMesa.routes.js");
 app.use("/juegosdemesa", juegosDeMesaRoutes);
+>>>>>>> 7dd58db54842319fb71450489f71bd513be59daa
 
 // Sincronizar base de datos y levantar servidor
 sequelize.sync().then(() => {
