@@ -1,10 +1,26 @@
+// modo oscuro
+
+const btnModoOscuro = document.getElementById("modoOscuroBtn");
+const body = document.body;
+
+if (localStorage.getItem("modoOscuro") === "true") {
+  body.classList.add("modo-oscuro");
+  btnModoOscuro.textContent = "🌙";
+}
+
+btnModoOscuro.addEventListener("click", () => {
+  body.classList.toggle("modo-oscuro");
+
+  const modoOscuroActivo = body.classList.contains("modo-oscuro");
+  localStorage.setItem("modoOscuro", modoOscuroActivo);
+
+  btnModoOscuro.textContent = modoOscuroActivo ? "🌙" : "☀️";
+});
+
 // === Variables globales ===
 let videojuegos = [];
 let paginaActual = 1;
 const porPagina = 9;
-let carrito = [];
-
-
 
 // === Referencias DOM ===
 const contenedor = document.getElementById("contenedorVideojuegos");
@@ -105,15 +121,24 @@ function agregarAlCarrito(id) {
     c.querySelector("h5").textContent === videojuego.nombre
   );
 
+  let carrito = JSON.parse(localStorage.getItem("carritoVideojuegos")) || [];
+
   const cantidad = parseInt(card.querySelector(".cantidad").value);
+
   const existente = carrito.find(item => item.id === id);
 
   if (existente) {
     existente.cantidad += cantidad;
-  } else {
-    carrito.push({ ...videojuego, cantidad });
+  } 
+  
+  else {
+    carrito.push({
+      id: videojuego.id,
+      cantidad: cantidad
+    });
   }
 
+  localStorage.setItem("carritoVideojuegos", JSON.stringify(carrito));
   console.log("Carrito actual:", carrito);
 
  Swal.fire({
@@ -124,25 +149,6 @@ function agregarAlCarrito(id) {
   timer: 1000
 });
 }
-
-// modo oscuro
-
-const btnModoOscuro = document.getElementById("modoOscuroBtn");
-const body = document.body;
-
-if (localStorage.getItem("modoOscuro") === "true") {
-  body.classList.add("modo-oscuro");
-  btnModoOscuro.textContent = "🌙";
-}
-
-btnModoOscuro.addEventListener("click", () => {
-  body.classList.toggle("modo-oscuro");
-
-  const modoOscuroActivo = body.classList.contains("modo-oscuro");
-  localStorage.setItem("modoOscuro", modoOscuroActivo);
-
-  btnModoOscuro.textContent = modoOscuroActivo ? "🌙" : "☀️";
-});
 
 
 // === Inicial ===
