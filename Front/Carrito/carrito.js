@@ -172,7 +172,7 @@ async function recalcularTotal() {
     total += item.cantidad * juego.precio;
   }
 
-  precioFinalElemento.textContent = "Total: " + total + "$";
+  precioFinalElemento.textContent = total + "$";
 }
 
 cargarJuegos();
