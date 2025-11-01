@@ -59,6 +59,10 @@ async function cargarJuegos() {
 
     const botones = document.createElement("section");
 
+    const precio = document.createElement("h3");
+    precio.textContent = juego.precio * producto.cantidad + "$";
+    botones.appendChild(precio);
+
     const botonReducir = document.createElement("button");
     botonReducir.className = "btn btn-primary botonReducir";
     botonReducir.textContent = " - ";
@@ -78,10 +82,6 @@ async function cargarJuegos() {
 
     console.log(juego.precio);
 
-    const precio = document.createElement("p");
-    precio.textContent = "Precio: " + juego.precio * producto.cantidad + "$";
-    botones.appendChild(precio);
-
     const botonEliminar = document.createElement("button");
     botonEliminar.className = "btn btn-danger";
     botonEliminar.textContent = " 🗑️ ";
@@ -91,7 +91,7 @@ async function cargarJuegos() {
 
     function updatePrecio() {
       const total = precioUnidad * producto.cantidad;
-      precio.textContent = "Precio: " + total + "$";
+      precio.textContent = total + "$";
       inputCantidad.value = producto.cantidad;
     }
     
