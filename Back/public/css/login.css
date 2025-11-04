@@ -1,0 +1,125 @@
+body {
+  background-image: url("/public/fondo_imagen.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  overflow: hidden;
+}
+
+#logo {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 40px 35px;
+  width: 350px;
+  text-align: center;
+  animation: fadeIn 0.8s ease;
+}
+
+h2 {
+  font-family: "Orbitron", sans-serif;
+  color: #00aaff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+}
+
+.form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+
+.form-control:focus {
+  background-color: rgba(0, 170, 255, 0.1);
+  border-color: #00aaff;
+  color: #fff;
+  box-shadow: 0 0 5px #00aaff;
+}
+
+.form-control::placeholder {
+      color: rgba(255, 255, 255, 0.65);
+      font-style: italic;
+      letter-spacing: 0.5px;
+      transition: color 0.3s ease;
+    }
+
+.form-control:focus::placeholder {
+      color: rgba(0, 170, 255, 0.8);
+    }
+
+.btn-login {
+  background: linear-gradient(90deg, #0077ff, #00aaff);
+  border: none;
+  border-radius: 10px;
+  width: 100%;
+  padding: 10px;
+  font-weight: 500;
+  color: white;
+  transition: 0.3s;
+}
+
+.btn-login:hover {
+  background: linear-gradient(90deg, #0055cc, #0099ff);
+  box-shadow: 0 0 10px #00aaff;
+  transform: translateY(-2px);
+}
+
+.footer-text {
+  color: #aaa;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Sutil brillo animado detrás del formulario */
+.glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(
+    circle,
+    rgba(0, 170, 255, 0.2) 0%,
+    transparent 70%
+  );
+  filter: blur(60px);
+  animation: pulse 6s infinite ease-in-out alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  to {
+    transform: scale(1.2);
+    opacity: 0.4;
+  }
+}
