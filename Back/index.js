@@ -4,6 +4,9 @@ require("dotenv").config(); // <- añadido
 const sequelize = require("./db/sequelize");
 const path = require("path"); // 👈 Importar el modulo path
 const app = express();
+const bcrypt = require("bcrypt");
+app.use(express.urlencoded({ extended: true })); // 👈 necesario para leer los datos del form
+
 
 // Configurar EJS como motor de vistas
 //let ejs = require('ejs');
@@ -28,14 +31,54 @@ app.use(express.json());
 // Rutas
 const videojuegosRoutes = require("./routes/videoJuegos.routes.js");
 app.use("/videojuegos", videojuegosRoutes);
-
-app.get("/", (req, res) => {
-  // Renderizo mi vista index.ejs
-  //   res.send("<h1>Hola</h1>");
-  res.render("layout", { path: "index" });
-});
 const juegosDeMesaRoutes = require("./routes/juegoDeMesa.routes.js");
 app.use("/juegosdemesa", juegosDeMesaRoutes);
+
+
+
+app.get("/login", (req, res) => {
+  res.render("login", { message: null, type: null });
+});
+
+
+const ADMIN_USER = "admin";
+const passOriginal = "1234"; // Contraseña original
+const complejidad = 10; // Nivel de complejidad para el hash
+
+const ADMIN_PASS_HASH = bcrypt.hashSync(passOriginal, complejidad); // Contraseña encriptada
+
+app.post("/login", (req, res) => {
+  const { username, password } = req.body;
+
+  if (username !== ADMIN_USER) {
+    return res.render("login", {
+      message: "Usuario incorrecto",
+      type: "error",
+    });
+  }
+
+  const isPasswordValid = bcrypt.compareSync(password, ADMIN_PASS_HASH);
+
+  if (!isPasswordValid) {
+    return res.render("login", {
+      message: "Contraseña incorrecta",
+      type: "error",
+    });
+  }
+   // ✅ Si todo está OK, mostrar mensaje y redirigir
+  return res.render("login", {
+    message: "Inicio de sesión exitoso",
+    type: "success",
+  });
+});
+
+app.get("/index", (req, res) => {
+  res.render("index", { user: ADMIN_USER });
+});
+
+
+
+
 
 // Sincronizar base de datos y levantar servidor
 sequelize.sync().then(() => {
