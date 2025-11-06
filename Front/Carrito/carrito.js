@@ -23,12 +23,20 @@ let carritoVideojuegos = JSON.parse(localStorage.getItem("carritoVideojuegos")) 
 let carritoJuegosDeMesa = JSON.parse(localStorage.getItem("carritoJuegosDeMesa")) || [];
 let precioFinalElemento = document.getElementById("precio-final");
 const contenedorJuegos = document.getElementById("juegos");
+const btnFinalizar = document.getElementById("btnFinalizar");
 
 async function cargarJuegos() {
   let carrito = [];
   carrito.push(...carritoJuegosDeMesa, ...carritoVideojuegos);
   console.log(carrito);
+  
+  if (carrito.length === 0) {
+    btnFinalizar.disabled = true;
+  }
 
+  else {
+    btnFinalizar.disabled = false;
+  }
 
   for (const producto of carrito) {
     const div = document.createElement("div");
@@ -122,20 +130,27 @@ async function cargarJuegos() {
       if (index !== -1) {
         if (funcion === "aumentar") {
           carritoCambiar[index].cantidad++;
-          producto.cantidad = carritoCambiar[index].cantidad; // sincroniza el objeto local
+          producto.cantidad = carritoCambiar[index].cantidad;
         }
 
         if (funcion === "reducir" && carritoCambiar[index].cantidad > 1) {
           carritoCambiar[index].cantidad--;
-          producto.cantidad = carritoCambiar[index].cantidad; // sincroniza el objeto local
+          producto.cantidad = carritoCambiar[index].cantidad;
         }
       }
 
       const tipoStorage = producto.tipo === "videojuego" ? "carritoVideojuegos" : "carritoJuegosDeMesa";
       localStorage.setItem(tipoStorage, JSON.stringify(carritoCambiar));
+      if (carrito.length === 0) {
+        btnFinalizar.disabled = true;
+      }
+
+      else {
+        btnFinalizar.disabled = false;
+      }
     }
     contenedorJuegos.appendChild(div);
-    
+  
     recalcularTotal();
   }
 }
