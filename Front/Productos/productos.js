@@ -19,7 +19,12 @@ btnModoOscuro.addEventListener("click", () => {
 });
 
 btnVolver.addEventListener("click", () => {
-  if (localStorage.getItem("carritoVideojuegos") === null && localStorage.getItem("carritoJuegosDeMesa") === null) {
+  carrito = [];
+  carritoVideojuegos = JSON.parse(localStorage.getItem("carritoVideojuegos"));
+  carritoJuegosDeMesa = JSON.parse(localStorage.getItem("carritoJuegosDeMesa"));
+  carrito.push(... carritoVideojuegos, ...carritoJuegosDeMesa);
+  console.log(carrito);
+  if (carrito.length === 0) {
     window.location.href = "../Bienvenido/bienvenido.html";}
 
   else {
@@ -35,8 +40,8 @@ btnVolver.addEventListener("click", () => {
     .then((resultado) => {
       if (resultado.isConfirmed) {
         localStorage.removeItem("nombre");
-        localStorage.removeItem("carritoVideojuegos");
-        localStorage.removeItem("carritoJuegosDeMesa");
+        localStorage.setItem("carritoVideojuegos", JSON.stringify([]));
+        localStorage.removeItem("carritoJuegosDeMesa", JSON.stringify([]));
         window.location.href = "../Bienvenido/bienvenido.html";
       } 
 
@@ -50,4 +55,3 @@ btnVolver.addEventListener("click", () => {
 const saludo = document.getElementById("saludo");
 const nombre = localStorage.getItem("nombre") || "Invitado";
 saludo.textContent = "Bienvenido, " + nombre;
-

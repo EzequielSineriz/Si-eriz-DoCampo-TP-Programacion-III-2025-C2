@@ -21,6 +21,8 @@ btnModoOscuro.addEventListener("click", () => {
 });
 
 boton.addEventListener("click", function() {
+    localStorage.setItem("carritoVideojuegos", JSON.stringify([]));
+    localStorage.setItem("carritoJuegosDeMesa", JSON.stringify([]));
     const error = document.getElementById("error");
     if (input.value.length < 3 || input.value.length > 11) {
         error.textContent = "El nombre debe tener entre 3 y 11 caracteres";
