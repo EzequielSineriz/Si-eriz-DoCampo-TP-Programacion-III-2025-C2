@@ -76,8 +76,7 @@ app.get("/index", (req, res) => {
   res.render("index", { user: ADMIN_USER });
 });
 
-
-
+// necesito que el post me retorne a la vista index con el usuario logueado
 
 
 // Sincronizar base de datos y levantar servidor
