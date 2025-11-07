@@ -35,6 +35,7 @@ btnVolver.addEventListener("click", () => {
       showCancelButton: true,
       confirmButtonText: "Volver",
       cancelButtonText: "Cancelar",
+      theme: body.classList.contains("modo-oscuro") ? "dark" : "light"
     })
     
     .then((resultado) => {

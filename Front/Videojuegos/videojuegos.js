@@ -147,7 +147,8 @@ function agregarAlCarrito(id) {
   icon: "success",
   title: "Agregado al carrito",
   showConfirmButton: false,
-  timer: 1000
+  timer: 1000,
+  theme: body.classList.contains("modo-oscuro") ? "dark" : "light"
 });
 }
 
