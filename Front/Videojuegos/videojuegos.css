@@ -20,11 +20,14 @@ body {
   object-fit: contain;
 }
 
-.card-img-top {
-  width: auto;
-  height: 300px;
-  object-fit: cover;
+.card img {
+  width: 100%;
+  height: 300px; /* Ajusta el alto que quieras */
+  object-fit: contain; /* Recorta la imagen manteniendo proporción */
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
+
 
 /* Modo oscuro */
 .modo-oscuro {
