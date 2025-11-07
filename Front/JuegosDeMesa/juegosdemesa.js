@@ -18,9 +18,9 @@ btnModoOscuro.addEventListener("click", () => {
 });
 
 // === Variables globales ===
-let videojuegos = [];
+let juegosdemesa = [];
 let paginaActual = 1;
-const porPagina = 9;
+const porPagina = 6;
 
 // === Referencias DOM ===
 const contenedor = document.getElementById("contenedorJuegosDeMesa");
@@ -29,7 +29,7 @@ const buscador = document.getElementById("buscador");
 const buscarBtn = document.getElementById("buscarBtn");
 const modoOscuroBtn = document.getElementById("modoOscuroBtn");
 
-// === Obtener videojuegos desde el backend ===
+// === Obtener juegos de mesa desde el backend ===
 async function cargarJuegosDeMesa() {
   try {
     const res = await fetch("http://localhost:3000/juegosdemesa");
@@ -52,25 +52,34 @@ function renderizar(juegosdemesaFiltrados) {
   const pagina = juegosdemesaFiltrados.slice(inicio, fin);
 
   if (pagina.length === 0) {
-    contenedor.innerHTML = "<p class='text-center text-muted'>No se encontraron resultados.</p>";
+    contenedor.innerHTML =
+      "<p class='text-center text-muted'>No se encontraron resultados.</p>";
     paginacion.innerHTML = "";
     return;
   }
 
-  pagina.forEach(v => {
+  pagina.forEach((v) => {
     const card = document.createElement("div");
     card.classList.add("col-12", "col-md-6", "col-lg-4");
     card.innerHTML = `
       <div class="card h-100 shadow-sm">
-        <img src="http://localhost:3000/public${v.imagen}" class="card-img-top" alt="${v.nombre}">
+        <img src="http://localhost:3000/public${
+          v.imagen
+        }" class="card-img-top" alt="${v.nombre}">
         <div class="card-body text-center d-flex flex-column">
           <h5 class="card-title">${v.nombre}</h5>
           <p class="card-text">${v.descripcion}</p>
-          <p class="text-${v.stock ? "success" : "danger"} fw-bold">${v.stock ? "Disponible" : "No disponible"}</p>
+          <p class="text-${v.stock ? "success" : "danger"} fw-bold">${
+      v.stock ? "Disponible" : "No disponible"
+    }</p>
           <p class="fw-bold">$${v.precio.toFixed(2)}</p>
           <div class="mt-auto">
-            <input type="number" min="1" max="10" value="1" class="form-control mb-2 cantidad" ${!v.stock ? "disabled" : ""}>
-            <button class="btn btn-primary w-100" ${!v.stock ? "disabled" : ""} onclick="agregarAlCarrito(${v.id})">
+            <input type="number" min="1" max="10" value="1" class="form-control mb-2 cantidad" ${
+              !v.stock ? "disabled" : ""
+            }>
+            <button class="btn btn-primary w-100" ${
+              !v.stock ? "disabled" : ""
+            } onclick="agregarAlCarrito(${v.id})">
               Agregar al carrito 🛒
             </button>
           </div>
@@ -87,9 +96,15 @@ function renderizarPaginacion(total) {
   const totalPaginas = Math.ceil(total / porPagina);
   paginacion.innerHTML = "";
 
+  if (totalPaginas <= 1) return; // Evita paginación innecesaria
+
   for (let i = 1; i <= totalPaginas; i++) {
     const li = document.createElement("li");
-    li.classList.add("page-item", i === paginaActual ? "active" : "");
+    li.classList.add("page-item");
+    if (i === paginaActual) {
+      li.classList.add("active");
+    }
+
     li.innerHTML = `<button class="page-link">${i}</button>`;
     li.addEventListener("click", () => {
       paginaActual = i;
@@ -98,6 +113,8 @@ function renderizarPaginacion(total) {
     paginacion.appendChild(li);
   }
 }
+
+
 
 // === Filtrado ===
 function filtrar() {
@@ -153,7 +170,7 @@ function agregarAlCarrito(id) {
 }
 
 // === Inicial ===
-//renderizar(videojuegos);
+//renderizar(juegfosdemesa);
 cargarJuegosDeMesa();
 
 // === Eventos ===
