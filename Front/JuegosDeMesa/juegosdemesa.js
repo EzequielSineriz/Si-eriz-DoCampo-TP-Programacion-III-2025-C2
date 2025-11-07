@@ -135,7 +135,7 @@ function agregarAlCarrito(id) {
     carrito.push({
       id: juegodemesa.id,
       cantidad: cantidad,
-      tipo: "juegodemesa"
+      tipo: "juegosdemesa"
     });
   }
 

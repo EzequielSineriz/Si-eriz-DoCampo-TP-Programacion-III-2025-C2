@@ -135,7 +135,7 @@ function agregarAlCarrito(id) {
     carrito.push({
       id: videojuego.id,
       cantidad: cantidad,
-      tipo: "videojuego"
+      tipo: "videojuegos"
     });
   }
 
