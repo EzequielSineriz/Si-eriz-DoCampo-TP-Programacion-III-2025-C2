@@ -150,20 +150,21 @@ function agregarAlCarrito(id) {
     carrito.push({
       id: videojuego.id,
       cantidad: cantidad,
-      tipo: "videojuego",
+      tipo: "videojuegos"
     });
   }
 
   localStorage.setItem("carritoVideojuegos", JSON.stringify(carrito));
   console.log("Carrito actual:", carrito);
 
-  Swal.fire({
-    position: "top-end",
-    icon: "success",
-    title: "Agregado al carrito",
-    showConfirmButton: false,
-    timer: 1000,
-  });
+ Swal.fire({
+  position: "top-end",
+  icon: "success",
+  title: "Agregado al carrito",
+  showConfirmButton: false,
+  timer: 1000,
+  theme: body.classList.contains("modo-oscuro") ? "dark" : "light"
+});
 }
 
 // === Inicial ===

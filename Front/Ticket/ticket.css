@@ -36,8 +36,36 @@ body.modo-oscuro {
 }
 
 body.modo-oscuro .header,
-body.modo-oscuro .footer {
+body.modo-oscuro .footer,
+body.modo-oscuro main{
   background-color: rgba(30, 30, 30, 0.95);
 }
+
+body.modo-oscuro main{
+  color: white
+}
+
+main{ 
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-self: center;
+  color: #121212;
+  margin-top: 100px;
+  padding: 30px;
+  padding-bottom: 50px;
+}
+
+#botones{
+  display: flex;
+  margin-top: 25px;
+  justify-content: space-between;
+  align-self: center;
+  gap: 60px;
+  margin-bottom: 50px 
+}
+
 
 

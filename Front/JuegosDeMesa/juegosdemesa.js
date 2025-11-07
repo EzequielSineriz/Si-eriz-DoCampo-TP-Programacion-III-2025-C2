@@ -135,7 +135,7 @@ function agregarAlCarrito(id) {
     carrito.push({
       id: juegodemesa.id,
       cantidad: cantidad,
-      tipo: "juegodemesa"
+      tipo: "juegosdemesa"
     });
   }
 
@@ -147,7 +147,8 @@ function agregarAlCarrito(id) {
   icon: "success",
   title: "Agregado al carrito",
   showConfirmButton: false,
-  timer: 1000
+  timer: 1000,
+  theme: body.classList.contains("modo-oscuro") ? "dark" : "light"
 });
 }
 

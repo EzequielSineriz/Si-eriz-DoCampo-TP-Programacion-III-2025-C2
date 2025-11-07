@@ -43,16 +43,7 @@ async function cargarJuegos() {
     div.classList.add("juegoCarrito");
     let res;
 
-    if (producto.tipo === "videojuego") 
-      {
-        res = await fetch("http://localhost:3000/videojuegos/" + producto.id);
-      }
-
-    if (producto.tipo === "juegodemesa")
-      {
-        res = await fetch("http://localhost:3000/juegosdemesa/" + producto.id);
-
-      }
+    res = await fetch("http://localhost:3000/" + producto.tipo + "/" + producto.id);
     
     const juego = await res.json();
     const precioUnidad = juego.precio;
@@ -123,7 +114,7 @@ async function cargarJuegos() {
     });
 
     function updateCarrito(funcion) {
-      let carritoCambiar = producto.tipo === "videojuego" ? carritoVideojuegos : carritoJuegosDeMesa;
+      let carritoCambiar = producto.tipo === "videojuegos" ? carritoVideojuegos : carritoJuegosDeMesa;
 
       const index = carritoCambiar.findIndex(item => item.id === producto.id);
 
@@ -139,7 +130,7 @@ async function cargarJuegos() {
         }
       }
 
-      const tipoStorage = producto.tipo === "videojuego" ? "carritoVideojuegos" : "carritoJuegosDeMesa";
+      const tipoStorage = producto.tipo === "videojuegos" ? "carritoVideojuegos" : "carritoJuegosDeMesa";
       localStorage.setItem(tipoStorage, JSON.stringify(carritoCambiar));
       if (carrito.length === 0) {
         btnFinalizar.disabled = true;
@@ -156,8 +147,8 @@ async function cargarJuegos() {
 }
 
 function eliminarDelCarrito(producto, div) {
-  let carritoCambiar = producto.tipo === "videojuego" ? carritoVideojuegos : carritoJuegosDeMesa;
-  const tipoStorage = producto.tipo === "videojuego" ? "carritoVideojuegos" : "carritoJuegosDeMesa";
+  let carritoCambiar = producto.tipo === "videojuegos" ? carritoVideojuegos : carritoJuegosDeMesa;
+  const tipoStorage = producto.tipo === "videojuegos" ? "carritoVideojuegos" : "carritoJuegosDeMesa";
 
   const index = carritoCambiar.findIndex(item => item.id === producto.id);
 
@@ -173,16 +164,8 @@ async function recalcularTotal() {
   const todos = [...carritoVideojuegos, ...carritoJuegosDeMesa];
 
   for (const item of todos) {
-    let res;
-
-    if (item.tipo === "videojuego") {
-      res = await fetch("http://localhost:3000/videojuegos/" + item.id);
-    } 
-    
-    else if (item.tipo === "juegodemesa") {
-      res = await fetch("http://localhost:3000/juegosdemesa/" + item.id);
-    }
-
+ 
+    let res = await fetch("http://localhost:3000/" + item.tipo + "/" + item.id);
     const juego = await res.json();
     total += item.cantidad * juego.precio;
   }
