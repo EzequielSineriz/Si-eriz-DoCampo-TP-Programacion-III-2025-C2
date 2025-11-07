@@ -31,14 +31,15 @@ async function getProductos() {
   let precioTotal = 0;
   const nombreCliente = localStorage.getItem("nombre") || "nombre";
   document.getElementById("nombreCliente").textContent = `Cliente: ${nombreCliente}`;
+
   for (let item of carrito) {
     try{
-    const response = await fetch('http://localhost:3000/' + item.tipo + '/' + item.id);
-    const producto = await response.json();
-    let productoLinea = document.createElement("p");
-    productoLinea.textContent = `${producto.nombre} - $${producto.precio}`;
-    precioTotal += producto.precio;
-    productosDiv.appendChild(productoLinea);
+      const response = await fetch('http://localhost:3000/' + item.tipo + '/' + item.id);
+      const producto = await response.json();
+      let productoLinea = document.createElement("p");
+      productoLinea.textContent = `${producto.nombre} - ${item.cantidad} - $${producto.precio * item.cantidad}`;
+      precioTotal += producto.precio * item.cantidad;
+      productosDiv.appendChild(productoLinea);
     }
     catch(error){
       console.error("Error al obtener el producto: ", item, error);
@@ -63,9 +64,25 @@ btnSalir.onclick = () => {
 }
 
 btnDescargar.onclick = () => {
-  const pdf = document.getElementById("ticket");
-  html2pdf().from(pdf).save();
+  const pdfElement = document.getElementById("ticket");
 
-}
+  const opciones = {
+    margin: [10, 10, 10, 10],
+    filename: "ticket_dualplay.pdf",
+    image: { type: "jpeg", quality: 0.98 },
+    html2canvas: {
+      scale: 2,
+      useCORS: true,
+      scrollY: 0,
+    },
+    jsPDF: {
+      unit: "mm",
+      format: "a4",
+      orientation: "portrait"
+    }
+  };
+
+  html2pdf().set(opciones).from(pdfElement).save();
+};
 
 getProductos();
