@@ -1,5 +1,6 @@
 const sequelize = require("../db/sequelize.js");
 const { DataTypes } = require("sequelize");
+const Productos = require("./productos.js");
 
 const JuegoDeMesa = sequelize.define(
   "JuegoDeMesa",
@@ -34,5 +35,20 @@ const JuegoDeMesa = sequelize.define(
     tableName: "JuegosDeMesa",
   }
 );
+
+JuegoDeMesa.afterCreate(async (juego, options) => {
+  try {
+    await Productos.create({
+      id_producto: juego.id,
+      nombre: juego.nombre,
+      precio: juego.precio,
+      tipo_producto: "Juego de mesa",
+    });
+  }
+  
+  catch (error) {
+    console.error("Error:", error);
+  }
+});
 
 module.exports = JuegoDeMesa;
