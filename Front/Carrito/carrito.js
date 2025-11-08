@@ -43,106 +43,83 @@ async function cargarJuegos() {
     div.classList.add("juegoCarrito");
     let res;
 
-    res = await fetch("http://localhost:3000/" + producto.tipo + "/" + producto.id);
-    
-    const juego = await res.json();
-    const precioUnidad = juego.precio;
+    try{
+      res = await fetch("http://localhost:3000/" + producto.tipo + "/" + producto.id);
+      
+      const juego = await res.json();
+      const precioUnidad = juego.precio;
 
-    const juegoImagen = document.createElement("img");
-    juegoImagen.src = "http://127.0.0.1:5500/Back/public/" + juego.imagen;;
-    div.appendChild(juegoImagen); 
+      const juegoImagen = document.createElement("img");
+      juegoImagen.src = "http://127.0.0.1:5500/Back/public/" + juego.imagen;;
+      div.appendChild(juegoImagen); 
 
-    const juegoNombre = document.createElement("h3");
-    juegoNombre.textContent = juego.nombre;
-    div.appendChild(juegoNombre);
+      const juegoNombre = document.createElement("h3");
+      juegoNombre.textContent = juego.nombre;
+      div.appendChild(juegoNombre);
 
-    const botones = document.createElement("section");
+      const botones = document.createElement("section");
 
-    const precio = document.createElement("h3");
-    precio.textContent = juego.precio * producto.cantidad + "$";
-    botones.appendChild(precio);
+      const precio = document.createElement("h3");
+      precio.textContent = juego.precio * producto.cantidad + "$";
+      botones.appendChild(precio);
 
-    const botonReducir = document.createElement("button");
-    botonReducir.className = "btn btn-primary botonReducir";
-    botonReducir.textContent = " - ";
-    botones.appendChild(botonReducir);
+      const botonReducir = document.createElement("button");
+      botonReducir.className = "btn btn-primary botonReducir";
+      botonReducir.textContent = " - ";
+      botones.appendChild(botonReducir);
 
-    const inputCantidad = document.createElement("input");
-    inputCantidad.className = 'input-cantidad form-control input';
-    inputCantidad.value = producto.cantidad;
-    inputCantidad.min = 1;
-    inputCantidad.readOnly = true;
-    botones.appendChild(inputCantidad);
-
-    const botonAumentar = document.createElement("button");
-    botonAumentar.className = "btn btn-primary botonAumentar";
-    botonAumentar.textContent = " + ";
-    botones.appendChild(botonAumentar);
-
-    console.log(juego.precio);
-
-    const botonEliminar = document.createElement("button");
-    botonEliminar.className = "btn btn-danger";
-    botonEliminar.textContent = " 🗑️ ";
-    botones.appendChild(botonEliminar);
-
-    div.appendChild(botones);
-
-    function updatePrecio() {
-      const total = precioUnidad * producto.cantidad;
-      precio.textContent = total + "$";
+      const inputCantidad = document.createElement("input");
+      inputCantidad.className = 'input-cantidad form-control input';
       inputCantidad.value = producto.cantidad;
-    }
-    
-    botonAumentar.addEventListener("click", () => {
-      updateCarrito("aumentar");
-      updatePrecio();
-      recalcularTotal();
-    });
+      inputCantidad.min = 1;
+      inputCantidad.readOnly = true;
+      botones.appendChild(inputCantidad);
 
-    botonReducir.addEventListener("click", () => {
-      if (producto.cantidad > 1) {
-        updateCarrito("reducir");
+      const botonAumentar = document.createElement("button");
+      botonAumentar.className = "btn btn-primary botonAumentar";
+      botonAumentar.textContent = " + ";
+      botones.appendChild(botonAumentar);
+
+      console.log(juego.precio);
+
+      const botonEliminar = document.createElement("button");
+      botonEliminar.className = "btn btn-danger";
+      botonEliminar.textContent = " 🗑️ ";
+      botones.appendChild(botonEliminar);
+
+      div.appendChild(botones);
+
+      function updatePrecio() {
+        const total = precioUnidad * producto.cantidad;
+        precio.textContent = total + "$";
+        inputCantidad.value = producto.cantidad;
+      }
+      
+      botonAumentar.addEventListener("click", () => {
+        updateCarrito("aumentar", producto);
         updatePrecio();
         recalcularTotal();
-      }
-    });
+      });
+
+      botonReducir.addEventListener("click", () => {
+        if (producto.cantidad > 1) {
+          updateCarrito("reducir", producto);
+          updatePrecio();
+          recalcularTotal();
+        }
+      });
+      
+      botonEliminar.addEventListener("click", () => {
+        eliminarDelCarrito(producto, div);
+        recalcularTotal();
+      });
+
+      contenedorJuegos.appendChild(div);
     
-    botonEliminar.addEventListener("click", () => {
-      eliminarDelCarrito(producto, div);
-      recalcularTotal();
-    });
+      recalcularTotal();}
 
-    function updateCarrito(funcion) {
-      let carritoCambiar = producto.tipo === "videojuegos" ? carritoVideojuegos : carritoJuegosDeMesa;
-
-      const index = carritoCambiar.findIndex(item => item.id === producto.id);
-
-      if (index !== -1) {
-        if (funcion === "aumentar") {
-          carritoCambiar[index].cantidad++;
-          producto.cantidad = carritoCambiar[index].cantidad;
-        }
-
-        if (funcion === "reducir" && carritoCambiar[index].cantidad > 1) {
-          carritoCambiar[index].cantidad--;
-          producto.cantidad = carritoCambiar[index].cantidad;
-        }
-      }
-
-      const tipoStorage = producto.tipo === "videojuegos" ? "carritoVideojuegos" : "carritoJuegosDeMesa";
-      localStorage.setItem(tipoStorage, JSON.stringify(carritoCambiar));
-      if (carrito.length === 0) {
-        btnFinalizar.disabled = true;
-      }
-
-      else {
-        btnFinalizar.disabled = false;
-      }
-    }
-    contenedorJuegos.appendChild(div);
-  
-    recalcularTotal();
+    catch (error) {
+      console.error("Error al cargar " + producto.nombre + ": " + error);
   }
 }
 
@@ -173,7 +150,35 @@ async function recalcularTotal() {
   precioFinalElemento.textContent = total + "$";
 }
 
+function updateCarrito(funcion, producto) {
+  const carrito = [...carritoVideojuegos, ...carritoJuegosDeMesa];
+  let carritoCambiar = producto.tipo === "videojuegos" ? carritoVideojuegos : carritoJuegosDeMesa;
+
+  const index = carritoCambiar.findIndex(item => item.id === producto.id);
+
+  if (index !== -1) {
+    if (funcion === "aumentar") {
+      carritoCambiar[index].cantidad++;
+      producto.cantidad = carritoCambiar[index].cantidad;
+    }
+
+    if (funcion === "reducir" && carritoCambiar[index].cantidad > 1) {
+      carritoCambiar[index].cantidad--;
+      producto.cantidad = carritoCambiar[index].cantidad;
+    }
+  }
+
+  const tipoStorage = producto.tipo === "videojuegos" ? "carritoVideojuegos" : "carritoJuegosDeMesa";
+  localStorage.setItem(tipoStorage, JSON.stringify(carritoCambiar));
+  if (carrito.length === 0) {
+    btnFinalizar.disabled = true;
+  }
+
+  else {
+    btnFinalizar.disabled = false;
+  }
+}
+}
+
 cargarJuegos();
-
-
 
