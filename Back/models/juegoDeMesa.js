@@ -39,7 +39,6 @@ const JuegoDeMesa = sequelize.define(
 JuegoDeMesa.afterCreate(async (juego, options) => {
   try {
     await Productos.create({
-      id_producto: juego.id,
       nombre: juego.nombre,
       precio: juego.precio,
       tipo_producto: "Juego de mesa",

@@ -39,7 +39,6 @@ const Videojuego = sequelize.define(
 Videojuego.afterCreate(async (videojuego) => {
   try {
     await Productos.create({
-      id_producto: videojuego.id,
       nombre: videojuego.nombre,
       precio: videojuego.precio,
       tipo_producto: "Videojuego",
