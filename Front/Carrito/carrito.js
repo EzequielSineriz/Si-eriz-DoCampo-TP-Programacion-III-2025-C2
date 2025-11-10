@@ -185,7 +185,7 @@ function updateCarrito(funcion, producto) {
 btnFinalizar.onclick = async () => {
   try {
     const venta = {
-      cliente: localStorage.getItem("nombre"),
+      cliente: localStorage.getItem("nombre") || "Invitado",
       productos: [...carritoVideojuegos.map(item => ({ id: item.id, tipo: "Videojuego", cantidad: item.cantidad })), 
                   ...carritoJuegosDeMesa.map(item => ({ id: item.id, tipo: "Juego de mesa", cantidad: item.cantidad }))]
     };

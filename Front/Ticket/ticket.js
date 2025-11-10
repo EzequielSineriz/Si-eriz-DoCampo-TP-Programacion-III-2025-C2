@@ -29,7 +29,7 @@ async function getProductos() {
   const carritoJuegosDeMesa = JSON.parse(localStorage.getItem("carritoJuegosDeMesa")) || [];
   const carrito = [...carritoVideojuegos, ...carritoJuegosDeMesa];
   let precioTotal = 0;
-  const nombreCliente = localStorage.getItem("nombre") || "nombre";
+  const nombreCliente = localStorage.getItem("nombre") || "Invitado";
   document.getElementById("nombreCliente").textContent = `Cliente: ${nombreCliente}`;
 
   for (let item of carrito) {
