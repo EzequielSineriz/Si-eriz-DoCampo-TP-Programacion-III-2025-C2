@@ -57,8 +57,9 @@ const traerVideojuegosPorId = async (req, res) => {
 const actualizarVideojuego = async (req, res) => {
     try {
     const { nombre, descripcion, precio, stock, imagen} = req.body;
+    const videojuego = await Videojuego.findByPk(req.params.id);
 
-    const resultadoDelUpdate = await Videojuego.update(
+    await videojuego.update(
       {
         nombre: nombre,
         descripcion: descripcion,
@@ -66,28 +67,26 @@ const actualizarVideojuego = async (req, res) => {
         precio: precio,
         imagen: imagen,
       },
-      {
-        where: {
-          id: req.params.id,
-        },
-      }
     );
 
-    res.status(200).send(resultadoDelUpdate);
-  } catch (error) {
+    res.status(200).send(videojuego);
+  } 
+  
+  catch (error) {
     console.log(error);
     res.status(500).send({ message: "Error interno" });
   }};
 
 const eliminarVideojuego = async (req, res) => {
-     try {
-    console.log(req.body);
-    const resultado = await Videojuego.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).send(resultado);
+    try {
+      const juego = await Videojuego.findByPk(req.params.id);
+
+      if (!juego) {
+        return res.status(404).send({ message: "Videojuego no encontrado" });
+      }
+
+      await juego.destroy();
+    res.status(200).send(juego);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Error interno" });

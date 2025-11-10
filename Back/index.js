@@ -33,7 +33,8 @@ const videojuegosRoutes = require("./routes/videoJuegos.routes.js");
 app.use("/videojuegos", videojuegosRoutes);
 const juegosDeMesaRoutes = require("./routes/juegoDeMesa.routes.js");
 app.use("/juegosdemesa", juegosDeMesaRoutes);
-
+const productosRoutes = require("./routes/productos.routes.js");
+app.use("/productos", productosRoutes);
 
 
 app.get("/login", (req, res) => {

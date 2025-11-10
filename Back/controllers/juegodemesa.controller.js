@@ -57,37 +57,36 @@ const traerJuegoDeMesaPorId = async (req, res) => {
 const actualizarJuegoDeMesa = async (req, res) => {
     try {
     const { nombre, descripcion, precio, stock, imagen} = req.body;
+    const juego = await JuegoDeMesa.findByPk(req.params.id);
 
-    const resultadoDelUpdate = await JuegoDeMesa.update(
+    await juego.update(
       {
         nombre: nombre,
         descripcion: descripcion,
         stock: stock,
         precio: precio,
         imagen: imagen,
-      },
-      {
-        where: {
-          id: req.params.id,
-        },
       }
     );
 
-    res.status(200).send(resultadoDelUpdate);
+    res.status(200).send(juego);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Error interno" });
-  }};
+  }
+};
 
 const eliminarJuegoDeMesa = async (req, res) => {
-     try {
-    console.log(req.body);
-    const resultado = await JuegoDeMesa.destroy({
-      where: {
-        id: req.params.id,
-      },
-    });
-    res.status(200).send(resultado);
+    try {
+      const juego = await JuegoDeMesa.findByPk(req.params.id);
+
+      if (!juego) {
+        return res.status(404).send({ message: "Juego de mesa no encontrado" });
+      }
+
+      await juego.destroy();
+
+    res.status(200).send(juego);
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: "Error interno" });

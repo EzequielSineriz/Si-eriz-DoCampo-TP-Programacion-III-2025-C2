@@ -21,6 +21,10 @@ const Productos = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    id_origen: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+    },
   },
   {
     tableName: "Productos",
