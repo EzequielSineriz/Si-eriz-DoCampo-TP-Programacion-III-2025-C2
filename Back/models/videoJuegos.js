@@ -54,7 +54,7 @@ Videojuego.afterCreate(async (videojuego) => {
 Videojuego.afterUpdate(async (videojuego, options) => {
   try {
     await Productos.update({nombre: videojuego.nombre, precio: videojuego.precio,},
-      {where: {id_origen: videojuego.id, tipo_producto: "Videojuego",},}
+      {where: {id_origen: videojuegoid, tipo_producto: "Videojuego",},}
     );
 
     console.log("Actualizado:", videojuego.nombre);

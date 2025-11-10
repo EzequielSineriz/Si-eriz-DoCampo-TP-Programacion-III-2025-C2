@@ -1,9 +1,8 @@
-const JuegoDeMesa = require("../models/juegoDeMesa"); // Import the juego de mesa model
+const JuegoDeMesa = require("../models/juegoDeMesa");
 
 const crearJuegoDeMesa = async (req, res) => {
   try {
 
-    // 1. Tomar datos.
     const body = req.body;
 
     const nombre = body.nombre;
@@ -13,9 +12,6 @@ const crearJuegoDeMesa = async (req, res) => {
     const imagen = body.imagen;
 
 
-    // const { nombre, descripcion, precio, stock, imagen} = req.body;
-
-    // 2. Hacer algo con los datos.
     const resultado = await JuegoDeMesa.create({
       nombre: nombre,
       descripcion: descripcion,
@@ -24,7 +20,6 @@ const crearJuegoDeMesa = async (req, res) => {
       imagen: imagen,
     });
     
-    // 3. Dar respuesta.
     res.status(201).send(resultado);
   } catch (error) {
     if (error instanceof TypeError) {

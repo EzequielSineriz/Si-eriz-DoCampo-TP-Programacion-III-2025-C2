@@ -1,4 +1,4 @@
-const Producto = require("../models/productos"); // Import the juego de mesa model
+const Producto = require("../models/productos");
 
 const traerProductos = async (req, res) => {
   try {
@@ -7,8 +7,8 @@ const traerProductos = async (req, res) => {
   } 
   
   catch (error) {
-    console.error("❌ Error al obtener productos:", error);
-    res.status(500).json({ error: "Error al obtener productos" });
+    console.error("Error:", error);
+    res.status(500).json({ error: "Error" });
   }
 };
 

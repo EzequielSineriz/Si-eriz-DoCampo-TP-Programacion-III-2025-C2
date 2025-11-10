@@ -6,6 +6,7 @@ const path = require("path"); // 👈 Importar el modulo path
 const app = express();
 const bcrypt = require("bcrypt");
 app.use(express.urlencoded({ extended: true })); // 👈 necesario para leer los datos del form
+require("./models/asociaciones.js");
 
 
 // Configurar EJS como motor de vistas
@@ -35,7 +36,8 @@ const juegosDeMesaRoutes = require("./routes/juegoDeMesa.routes.js");
 app.use("/juegosdemesa", juegosDeMesaRoutes);
 const productosRoutes = require("./routes/productos.routes.js");
 app.use("/productos", productosRoutes);
-
+const ventasRoutes = require("./routes/ventas.routes.js");
+app.use("/ventas", ventasRoutes);
 
 app.get("/login", (req, res) => {
   res.render("login", { message: null, type: null });

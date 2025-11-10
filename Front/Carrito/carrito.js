@@ -24,10 +24,12 @@ let carritoJuegosDeMesa = JSON.parse(localStorage.getItem("carritoJuegosDeMesa")
 let precioFinalElemento = document.getElementById("precio-final");
 const contenedorJuegos = document.getElementById("juegos");
 const btnFinalizar = document.getElementById("btnFinalizar");
+let carrito = [];
+carrito.push(...carritoJuegosDeMesa, ...carritoVideojuegos);
+
 
 async function cargarJuegos() {
-  let carrito = [];
-  carrito.push(...carritoJuegosDeMesa, ...carritoVideojuegos);
+
   console.log(carrito);
   
   if (carrito.length === 0) {
@@ -178,6 +180,30 @@ function updateCarrito(funcion, producto) {
     btnFinalizar.disabled = false;
   }
 }
+}
+
+btnFinalizar.onclick = async () => {
+  try {
+    const venta = {
+      cliente: localStorage.getItem("nombre"),
+      productos: [...carritoVideojuegos.map(item => ({ id: item.id, tipo: "Videojuego", cantidad: item.cantidad })), 
+                  ...carritoJuegosDeMesa.map(item => ({ id: item.id, tipo: "Juego de mesa", cantidad: item.cantidad }))]
+    };
+
+    console.log(venta);
+
+    const respuesta = await fetch("http://localhost:3000/ventas", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(venta),
+    });
+  }
+
+  catch (error) {
+      console.error("Error al finalizar la compra:", error);
+    }
+
+    window.location.href='../Ticket/ticket.html';
 }
 
 cargarJuegos();
