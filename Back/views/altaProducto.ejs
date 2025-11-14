@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Alta de Producto</title>
+</head>
+<body>
+
+<h1>Alta de Producto</h1>
+
+<form action="/productos/alta" method="POST" enctype="multipart/form-data">
+  <label>Nombre:</label>
+  <input type="text" name="nombre" required>
+
+  <label>Precio:</label>
+  <input type="number" name="precio" step="0.01" required>
+
+  <label>Tipo Producto:</label>
+  <select name="tipo_producto" required>
+    <option value="Videojuego">Videojuego</option>
+    <option value="JuegoDeMesa">Juego de Mesa</option>
+  </select>
+
+  <label>Stock:</label>
+  <select name="stock" required>
+    <option value="true">Disponible</option>
+    <option value="false">Sin stock</option>
+  </select>
+
+  <label>Imagen:</label>
+  <input type="file" name="imagen" required>
+
+  <button type="submit">Guardar</button>
+</form>
+
+</body>
+</html>
+

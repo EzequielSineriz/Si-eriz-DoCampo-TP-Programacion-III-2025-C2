@@ -69,17 +69,22 @@ app.post("/login", (req, res) => {
     });
   }
    // ✅ Si todo está OK, mostrar mensaje y redirigir
-  return res.render("login", {
-    message: "Inicio de sesión exitoso",
-    type: "success",
+  return res.redirect("/dashboard");
+    });
+
+app.get("/dashboard", (req, res) => {
+  res.render("dashboard", {
+    message: "Bienvenido!",
+    type: "success"
   });
 });
+
+
 
 app.get("/index", (req, res) => {
   res.render("index", { user: ADMIN_USER });
 });
 
-// necesito que el post me retorne a la vista index con el usuario logueado
 
 
 // Sincronizar base de datos y levantar servidor

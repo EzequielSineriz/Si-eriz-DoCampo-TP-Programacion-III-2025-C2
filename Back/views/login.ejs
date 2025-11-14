@@ -59,26 +59,12 @@
 
       <div class="footer-text">Panel de administración</div>
     </div>
+    <!--Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <script>
-      const message = "<%= message || '' %>";
-      const type = "<%= type || '' %>";
-
-      if (message) {
-        Swal.fire({
-          icon: type === "success" ? "success" : "error",
-          title: message,
-          confirmButtonColor: "#0077ff",
-          background: "#0a0f1a",
-          color: "#fff",
-          timer: 2000,
-          showConfirmButton: false,
-        }).then(() => {
-          if (type === "success") {
-            window.location.href = "/index";
-          }
-        });
-      }
-    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="/public/js/login.js"></script>
   </body>
 </html>

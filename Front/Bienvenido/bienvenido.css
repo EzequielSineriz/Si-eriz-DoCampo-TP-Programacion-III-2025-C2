@@ -79,7 +79,19 @@ body.modo-oscuro .input{
 
 }
 
+/* style.css */
+.futuristic-heading {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 50px;
+    color: #e6ecec; /* Example color */
+    padding: 5px 20px;
+    text-align: center
+}
+
+
+
 body.modo-oscuro ::placeholder{
+  font-family: 'Orbitron', sans-serif;
   color: gray; 
 }
 
@@ -100,12 +112,11 @@ body.modo-oscuro ::placeholder{
       font-size: 1em;
   }
 
-  .bienvenido{
-      font-size: 3em;
-  }
+
 
   #error{
     font-size: 0.9em;
 }
+
 
 }
