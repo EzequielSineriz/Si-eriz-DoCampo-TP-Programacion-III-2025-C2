@@ -69,14 +69,23 @@ app.post("/login", (req, res) => {
     });
   }
    // ✅ Si todo está OK, mostrar mensaje y redirigir
-  return res.redirect("/dashboard");
+  return res.redirect("/admin");
     });
 
-app.get("/dashboard", (req, res) => {
-  res.render("dashboard", {
-    message: "Bienvenido!",
-    type: "success"
-  });
+//app.get("/dashboard", (req, res) => {
+//  res.render("dashboard", {
+//    message: "Bienvenido!",
+//    type: "success"
+//  });
+//});
+const Videojuego = require("./models/videoJuegos");
+const JuegoDeMesa = require("./models/juegoDeMesa");
+
+app.get("/admin", async (req, res) => {
+  const videojuegos = await Videojuego.findAll();
+  const juegosMesa = await JuegoDeMesa.findAll();
+
+  res.render("dashboard", { videojuegos, juegosMesa });
 });
 
 
