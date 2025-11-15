@@ -70,12 +70,9 @@ async function eliminar(tipo, id) {
   }
 }
 
-function editar(tipo, id) {
-  if (tipo === "videojuego") {
-    window.location.href = `/videojuegos/editar/${id}`;
-  } else {
-    window.location.href = `/juegosdemesa/editar/${id}`;
-  }
+function editar() {
+  window.location.href = "./editarProducto";
+  
 }
 
 cargarDatos();
