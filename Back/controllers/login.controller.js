@@ -20,7 +20,8 @@ const procesarLogin = async (req, res) => {
     if (!admin) {
       return res.render("login", {
         message: "Usuario incorrecto",
-        type: "error"
+        type: "error",
+        redirect: ""
       });
     }
 
@@ -30,21 +31,28 @@ const procesarLogin = async (req, res) => {
     if (!isValid) {
       return res.render("login", {
         message: "Contraseña incorrecta",
-        type: "error"
+        type: "error",
+        redirect: ""
       });
     }
 
     // Login OK
-    return res.redirect("/admin");
+    return res.render("login", {
+      message: "Inicio de sesión exitoso",
+      type: "success",
+      redirect: "/admin"
+    });
 
   } catch (err) {
     console.error("Error en login:", err);
     return res.render("login", {
       message: "Error interno",
-      type: "error"
+      type: "error",
+      redirect: ""
     });
   }
 };
+
 
 module.exports = {
   mostrarLogin,

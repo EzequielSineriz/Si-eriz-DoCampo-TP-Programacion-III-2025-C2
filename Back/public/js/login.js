@@ -1,31 +1,46 @@
+const usuario = document.getElementById("usuario");
+const contrasena = document.getElementById("contrasena");
+const btnIngresar = document.getElementById("btnIngresar");
 
-const message = "<%= message || '' %>";
-const type = "<%= type || '' %>";
-const usuario = document.getElementById("usuario")
-const contrasena = document.getElementById("contrasena")
+// Mensajes que vienen del backend
+const message = window.loginMessage;
+const type = window.loginType;
+const redirect = window.loginRedirect;
 
-document.getElementById("btnIngresar").onclick = () => {
-  const usuario = document.getElementById("usuario").value;
-  const contrasena = document.getElementById("contrasena").value;
-
-  if (usuario !== "" && contrasena !== "" && usuario !== "admin" && contrasena !== 1234) {
-    Swal.fire({
-      icon: type === "success" ? "success" : "error",
-      title: "Contraseña Incorrecta",
-      confirmButtonColor: "#0077ff",
-      background: "#0a0f1a",
-      color: "#fff",
-      timer: 2000,
-      showConfirmButton: false,
-    }).then(() => {
-      if (type === "success") {
-        window.location.href = "/admin";
-      }
-    });
-  }
+// Si hay mensaje del backend → mostrar SWEETALERT
+if (message) {
+  Swal.fire({
+    icon: type,
+    title: message,
+    confirmButtonColor: "#0077ff",
+    background: "#0a0f1a",
+    color: "#fff",
+    timer: 1800,
+    showConfirmButton: false,
+  }).then(() => {
+    if (type === "success" && redirect) {
+      window.location.href = redirect;
+    }
+  });
 }
 
-document.getElementById("autoIngreso").onclick = function () {
-  contrasena.value = 1234;
+// VALIDACIÓN BÁSICA DEL FORM ANTES DE ENVIARLO
+btnIngresar.addEventListener("click", () => {
+  if (usuario.value === "" || contrasena.value === "") {
+    Swal.fire({
+      icon: "warning",
+      title: "Completa todos los campos",
+      background: "#0a0f1a",
+      color: "#fff",
+      timer: 1500,
+      showConfirmButton: false,
+    });
+  }});
+
+// BOTÓN DE INGRESO AUTOMÁTICO (para facilitar testing)
+const autoIngreso = document.getElementById("autoIngreso");
+autoIngreso.addEventListener("click", () => {
   usuario.value = "admin";
-};
+  contrasena.value = 1234;
+  btnIngresar.click();
+});
