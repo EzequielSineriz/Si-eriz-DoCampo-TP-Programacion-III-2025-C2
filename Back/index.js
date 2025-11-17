@@ -41,6 +41,8 @@ const ventasRoutes = require("./routes/ventas.routes.js");
 app.use("/ventas", ventasRoutes);
 const loginRoutes = require("./routes/login.routes.js");
 app.use("/", loginRoutes);
+const adminRoutes = require("./routes/admin.routes.js");
+app.use("/", adminRoutes);
 
 //Dashboard admin
 
