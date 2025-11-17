@@ -3,12 +3,12 @@ const sequelize = require("../db/sequelize");
 const Admin = require("../models/admin");
 
 
-// 👉 GET /login
+// GET /login
 const mostrarLogin = (req, res) => {
-  res.render("login", { message: null, type: null });
+  res.render("login", { message: null, type: null, redirect: null });
 };
 
-// 👉 POST /login
+//  POST /login
 
 const procesarLogin = async (req, res) => {
   const { username, password } = req.body;
@@ -21,7 +21,7 @@ const procesarLogin = async (req, res) => {
       return res.render("login", {
         message: "Usuario incorrecto",
         type: "error",
-        redirect: ""
+        redirect: null
       });
     }
 
@@ -32,7 +32,7 @@ const procesarLogin = async (req, res) => {
       return res.render("login", {
         message: "Contraseña incorrecta",
         type: "error",
-        redirect: ""
+        redirect: null
       });
     }
 
@@ -48,7 +48,7 @@ const procesarLogin = async (req, res) => {
     return res.render("login", {
       message: "Error interno",
       type: "error",
-      redirect: ""
+      redirect : null
     });
   }
 };
