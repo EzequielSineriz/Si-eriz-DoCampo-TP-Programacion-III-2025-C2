@@ -7,6 +7,7 @@ const app = express();
 const bcrypt = require("bcrypt");
 app.use(express.urlencoded({ extended: true })); // 👈 necesario para leer los datos del form
 require("./models/asociaciones.js");
+require("./models/admin"); // importante
 
 
 // Configurar EJS como motor de vistas
@@ -38,46 +39,11 @@ const productosRoutes = require("./routes/productos.routes.js");
 app.use("/productos", productosRoutes);
 const ventasRoutes = require("./routes/ventas.routes.js");
 app.use("/ventas", ventasRoutes);
+const loginRoutes = require("./routes/login.routes.js");
+app.use("/", loginRoutes);
 
-app.get("/login", (req, res) => {
-  res.render("login", { message: null, type: null });
-});
+//Dashboard admin
 
-
-const ADMIN_USER = "admin";
-const passOriginal = "1234"; // Contraseña original
-const complejidad = 10; // Nivel de complejidad para el hash
-
-const ADMIN_PASS_HASH = bcrypt.hashSync(passOriginal, complejidad); // Contraseña encriptada
-
-app.post("/login", (req, res) => {
-  const { username, password } = req.body;
-
-  if (username !== ADMIN_USER) {
-    return res.render("login", {
-      message: "Usuario incorrecto",
-      type: "error",
-    });
-  }
-
-  const isPasswordValid = bcrypt.compareSync(password, ADMIN_PASS_HASH);
-
-  if (!isPasswordValid) {
-    return res.render("login", {
-      message: "Contraseña incorrecta",
-      type: "error",
-    });
-  }
-   // ✅ Si todo está OK, mostrar mensaje y redirigir
-  return res.redirect("/admin");
-    });
-
-//app.get("/dashboard", (req, res) => {
-//  res.render("dashboard", {
-//    message: "Bienvenido!",
-//    type: "success"
-//  });
-//});
 const Videojuego = require("./models/videoJuegos");
 const JuegoDeMesa = require("./models/juegoDeMesa");
 
@@ -89,10 +55,6 @@ app.get("/admin", async (req, res) => {
 });
 
 
-
-app.get("/index", (req, res) => {
-  res.render("index", { user: ADMIN_USER });
-});
 
 
 

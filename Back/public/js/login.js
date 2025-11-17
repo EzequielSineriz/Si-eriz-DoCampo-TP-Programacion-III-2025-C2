@@ -19,7 +19,7 @@ document.getElementById("btnIngresar").onclick = () => {
       showConfirmButton: false,
     }).then(() => {
       if (type === "success") {
-        window.location.href = "/index";
+        window.location.href = "/admin";
       }
     });
   }

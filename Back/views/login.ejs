@@ -63,7 +63,28 @@
       <button class="btn btn-primary" id="autoIngreso"> Ingreso automático </button>
 
       <div class="footer-text">Panel de administración</div>
+
     </div>
+     <!-- SweetAlert mensajes -->
+    <% if (typeof error !== "undefined") { %>
+        <script>
+            Swal.fire({
+                icon: "error",
+                title: "Error",
+                text: "<%= error %>"
+            });
+        </script>
+    <% } %>
+
+    <% if (typeof success !== "undefined") { %>
+        <script>
+            Swal.fire({
+                icon: "success",
+                title: "Bienvenido",
+                text: "<%= success %>"
+            });
+        </script>
+    <% } %>
     <!--Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
