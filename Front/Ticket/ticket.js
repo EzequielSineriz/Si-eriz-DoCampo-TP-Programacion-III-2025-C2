@@ -28,31 +28,54 @@ async function getProductos() {
   const carritoVideojuegos = JSON.parse(localStorage.getItem("carritoVideojuegos")) || [];
   const carritoJuegosDeMesa = JSON.parse(localStorage.getItem("carritoJuegosDeMesa")) || [];
   const carrito = [...carritoVideojuegos, ...carritoJuegosDeMesa];
+
+  const productosDiv = document.getElementById("productos");
+  productosDiv.innerHTML = "";
+
   let precioTotal = 0;
+
+  // Fecha
+  const fecha = new Date().toLocaleString("es-AR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+  });
+  document.getElementById("fechaTicket").textContent = `Fecha: ${fecha}`;
+
+  // Cliente
   const nombreCliente = localStorage.getItem("nombre") || "Invitado";
   document.getElementById("nombreCliente").textContent = `Cliente: ${nombreCliente}`;
 
+  // Productos
   for (let item of carrito) {
-    try{
+    try {
       const response = await fetch('http://localhost:3000/' + item.tipo + '/' + item.id);
       const producto = await response.json();
-      let productoLinea = document.createElement("p");
-      productoLinea.textContent = `${producto.nombre} - ${item.cantidad} - $${producto.precio * item.cantidad}`;
-      precioTotal += producto.precio * item.cantidad;
-      productosDiv.appendChild(productoLinea);
-    }
-    catch(error){
-      console.error("Error al obtener el producto: ", item, error);
+
+      const subtotal = producto.precio * item.cantidad;
+      precioTotal += subtotal;
+    
+      const fila = document.createElement("div");
+      fila.classList.add("fila-producto");
+
+      fila.innerHTML = `
+        <span class="col col-producto">${producto.nombre}</span>
+        <span class="col col-precio">$${producto.precio}</span>
+        <span class="col col-cantidad">${item.cantidad}</span>
+        <span class="col col-subtotal">$${subtotal}</span>
+      `;
+      productosDiv.appendChild(fila);
+
+    } catch (error) {
+      console.error("Error al obtener producto:", error);
     }
   }
 
-  let separador = document.createElement("h2");
-  separador.textContent = "---------------------------------";
-  productosDiv.appendChild(separador);
-  let totalLinea = document.createElement("h3");
-  totalLinea.textContent = `Total: $${precioTotal}`;
-  productosDiv.appendChild(totalLinea);
+  document.getElementById("totalFinal").textContent = `Total: $${precioTotal}`;
 }
+
 
 
 // botones
