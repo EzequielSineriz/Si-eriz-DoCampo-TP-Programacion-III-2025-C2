@@ -1,17 +1,46 @@
 async function eliminar(tipo, id) {
-  const nombre = tipo === "videojuego" ? "videojuegos" : "juegos-mesa";
+  const base = tipo === "videojuego" ? "videojuegos" : "juegosdemesa";
 
   const r = await Swal.fire({
     title: "¿Seguro?",
-    text: "El elemento será eliminado",
+    text: "El juego pasará a estar SIN STOCK",
     icon: "warning",
     showCancelButton: true,
-    confirmButtonText: "Sí, eliminar",
+    confirmButtonText: "Confirmar",
   });
 
   if (r.isConfirmed) {
-    await fetch(`/${nombre}/${id}`, { method: "DELETE" });
-    Swal.fire("Eliminado", "", "success");
-    setTimeout(() => location.reload(), 800);
+
+    const res = await fetch(`/${base}/${id}/stock`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ stock: false })
+    });
+
+    if (!res.ok) {
+      Swal.fire("Error", "No se pudo actualizar el stock", "error");
+      return;
+    }
+
+    Swal.fire("Actualizado", "El juego ahora está sin stock", "success");
+    setTimeout(() => location.reload(), 700);
   }
+}
+
+async function darAlta(tipo, id) {
+  const base = tipo === "videojuego" ? "videojuegos" : "juegosdemesa";
+
+  const res = await fetch(`/${base}/${id}/stock`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ stock: true })
+  });
+
+  if (!res.ok) {
+    Swal.fire("Error", "No se pudo dar de alta el stock", "error");
+    return;
+  }
+
+  Swal.fire("Listo", "Stock dado de alta correctamente", "success");
+  setTimeout(() => location.reload(), 700);
 }

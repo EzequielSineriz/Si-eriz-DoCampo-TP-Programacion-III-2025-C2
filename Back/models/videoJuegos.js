@@ -26,6 +26,7 @@ const Videojuego = sequelize.define(
     stock: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
+      defaultValue: true,
     },
     imagen: {
       type: DataTypes.TEXT,

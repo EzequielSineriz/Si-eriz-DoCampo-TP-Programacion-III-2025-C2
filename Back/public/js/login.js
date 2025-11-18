@@ -42,5 +42,5 @@ const autoIngreso = document.getElementById("autoIngreso");
 autoIngreso.addEventListener("click", () => {
   usuario.value = "admin";
   contrasena.value = 1234;
-  btnIngresar.click();
+  //btnIngresar.click();
 });

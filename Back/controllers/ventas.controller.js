@@ -2,6 +2,9 @@ const Ventas = require("../models/ventas.js");
 const VentasProductos = require("../models/ventasProductos.js");
 const Productos = require("../models/productos.js");
 
+// Crear el get de traer ventas... 
+
+
 const crearVenta = async (req, res) => {
   const { cliente, productos } = req.body;
 

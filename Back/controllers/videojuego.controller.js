@@ -85,7 +85,16 @@ const eliminarVideojuego = async (req, res) => {
         return res.status(404).send({ message: "Videojuego no encontrado" });
       }
 
-      await juego.destroy();
+      await juego.update(
+        {
+          stock: false,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
     res.status(200).send(juego);
   } catch (error) {
     console.log(error);
