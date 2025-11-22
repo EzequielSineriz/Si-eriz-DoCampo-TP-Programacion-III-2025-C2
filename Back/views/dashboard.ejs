@@ -68,7 +68,7 @@
       <!-- VIDEOJUEGOS -->
       <div class="mb-5">
         <h2>🎮 Videojuegos</h2>
-        <a href="/altaproducto" class="btn btn-success mb-3">
+        <a href="/altaproducto/?tipo=videojuego" class="btn btn-success mb-3">
           ➕ Agregar Videojuego
         </a>
 
@@ -97,7 +97,7 @@
 
                 <div class="mt-auto">
                   <a
-                    href="/actualizarproducto/<%= v.id %>"
+                    href="/actualizarproducto/?tipo=videojuego&id=<%= v.id %>"
                     class="btn btn-warning w-100 mb-2"
                   >
                     ✏ Editar
@@ -127,7 +127,7 @@
       <!-- JUEGOS DE MESA -->
       <div>
         <h2>🎲 Juegos de Mesa</h2>
-        <a href="/altaproducto" class="btn btn-success mb-3">
+        <a href="/altaproducto/?tipo=juegodemesa" class="btn btn-success mb-3">
           ➕ Agregar Juego de Mesa
         </a>
 
@@ -157,7 +157,7 @@
                 
                 <div class="mt-auto">
                   <a
-                    href="/actualizarproducto/<%= j.id %>"
+                    href="/actualizarproducto/?tipo=juegodemesa&id=<%= j.id %>"
                     class="btn btn-warning w-100 mb-2"
                   >
                     ✏ Editar
