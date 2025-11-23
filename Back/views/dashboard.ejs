@@ -100,18 +100,18 @@
                     href="/actualizarproducto/?tipo=videojuego&id=<%= v.id %>"
                     class="btn btn-warning w-100 mb-2"
                   >
-                    ✏ Editar
+                    Editar
                   </a>
                   <% if (v.stock) { %>
                   <button
                     class="btn btn-danger w-100"
                     onclick="eliminar('videojuego', <%= v.id %>)"
                   >
-                    🗑 Sin Stock (Baja Logica)
+                    Deshabilitar Stock
                   </button>
                   <% } else { %>
                     <button class="btn btn-success w-100" onclick="darAlta('videojuego', <%= v.id %>)">
-                    🔄 Dar de Alta
+                    Habilitar Stock
                   </a>
                   <% } %>
                 </div>
@@ -160,18 +160,18 @@
                     href="/actualizarproducto/?tipo=juegodemesa&id=<%= j.id %>"
                     class="btn btn-warning w-100 mb-2"
                   >
-                    ✏ Editar
+                    Editar
                   </a>
                   <% if (j.stock) { %>
                   <button
                     class="btn btn-danger w-100"
                     onclick="eliminar('juegoDeMesa', <%= j.id %>)"
                   >
-                    🗑 Sin Stock (Baja Logica)
+                    Deshabilitar Stock
                   </button>
                   <% } else { %>
                     <button class="btn btn-success w-100" onclick="darAlta('juegoMesa', <%= j.id %>)">
-                      🔄 Dar de Alta
+                      Habilitar Stock
                     </a>
                   <% } %>
                 </div>

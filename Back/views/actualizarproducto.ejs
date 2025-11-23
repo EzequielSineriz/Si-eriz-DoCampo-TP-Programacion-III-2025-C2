@@ -44,12 +44,30 @@
 
     <main id="main-actualizar">
       <div id="div-inputs">
-        <input class="form-control" id = "id-input" disabled="true" type="text">
-        <input class="form-control" id = "tipo-input" disabled="true" type="text">
-        <input class="form-control" id="nombre-input" placeholder="Nombre" type="text">
-        <textarea class="form-control" id = "descripcion-input" placeholder="Descricion" type="text"></textarea>
-        <input class="form-control" id = "precio-input" placeholder="Precio" type="text">
-        <input class="form-control" id = "imagen-input" placeholder="Imagen" type="file">
+        <div class="input-label">
+          <label for="id-input">ID</label>
+          <input class="form-control" id = "id-input" disabled="true" type="text">
+        </div>
+        <div class="input-label">
+          <label for="tipo-input">Tipo</label>
+          <input class="form-control" id = "tipo-input" disabled="true" type="text">
+        </div>
+        <div class="input-label">
+          <label for="nombre-input">Nombre</label>
+          <input class="form-control" id="nombre-input" type="text">
+        </div>
+        <div class="input-label">
+          <label for="descripcion-input">Descripcion</label>
+          <textarea class="form-control" id = "descripcion-input" type="text"></textarea>
+        </div>
+        <div class="input-label">
+          <label for="precio-input">Precio</label>
+          <input class="form-control" id = "precio-input" type="text">
+        </div>
+        <div class="input-label">
+          <label for="imagen-input">Imagen</label>
+          <input class="form-control" id = "imagen-input" type="file">
+        </div>
       </div>
       <div>
         <button id="boton-act" class="btn btn-primary"> Actualizar </button>
