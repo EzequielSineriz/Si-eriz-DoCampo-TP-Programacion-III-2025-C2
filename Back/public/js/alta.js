@@ -61,5 +61,7 @@ document.getElementById('boton-alta').addEventListener('click', async () => {
     catch (error) {
         console.error('Error al crear el producto:', error);
     }
+
+    window.location.href = '/admin';
 }
 );
