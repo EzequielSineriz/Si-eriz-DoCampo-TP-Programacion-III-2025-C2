@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const JuegoDeMesa = require("../models/juegoDeMesa");
+const multer = require("multer");
+const path = require("path");
 
 const {
   crearJuegoDeMesa,
@@ -10,11 +12,21 @@ const {
   eliminarJuegoDeMesa
 } = require("../controllers/juegodemesa.controller.js");
 
+// multer
+const storage = multer.diskStorage({
+  destination: "public/",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
 const { validarJuegoDeMesa, validarJuegoDeMesaId } =
   require("../middleware/juegosdemesa.middleware.js");
 
 // POST
-router.post("/", validarJuegoDeMesa, crearJuegoDeMesa);
+router.post("/", upload.single("imagen"), validarJuegoDeMesa, crearJuegoDeMesa);
 
 // GET
 router.get("/", traerJuegoDeMesa);

@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const Videojuego = require("../models/videoJuegos");
-
+const path = require("path");
+const multer = require("multer");
 
 const {
   crearVideojuego,
@@ -11,11 +12,21 @@ const {
   eliminarVideojuego
 } = require("../controllers/videojuego.controller.js");
 
+// multer
+const storage = multer.diskStorage({
+  destination: "public/",
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
 const { validarVideojuego, validarVideojuegoId } =
   require("../middleware/videojuegos.middleware.js");
 
 // POST
-router.post("/", validarVideojuego, crearVideojuego);
+router.post("/", upload.single("imagen"), validarVideojuego, crearVideojuego);
 
 // GET
 router.get("/", traerVideojuegos);

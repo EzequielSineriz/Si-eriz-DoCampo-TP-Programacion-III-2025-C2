@@ -9,7 +9,7 @@ const crearJuegoDeMesa = async (req, res) => {
     const descripcion = body.descripcion;
     const precio = body.precio;
     const stock = body.stock;
-    const imagen = body.imagen;
+    const imagen = req.file ? req.file.originalname : null;
 
 
     const resultado = await JuegoDeMesa.create({
@@ -17,7 +17,7 @@ const crearJuegoDeMesa = async (req, res) => {
       descripcion: descripcion,
       precio: precio,
       stock: stock,
-      imagen: imagen,
+      imagen: "/" + imagen,
     });
     
     res.status(201).send(resultado);

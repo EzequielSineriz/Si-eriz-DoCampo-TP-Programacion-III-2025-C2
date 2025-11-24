@@ -3,18 +3,27 @@ const zod = require("zod");
 const VideojuegoCrear = zod.object({
   nombre: zod.string().min(2, "El nombre es obligatorio"),
   descripcion: zod.string().min(8, "La descripcion es obligatoria"),
-  precio: zod.number().min(1, "El precio es obligatorio"),
-  stock: zod.boolean(),
+  precio: zod.string().min(1, "El precio es obligatorio").transform(val => Number(val)),
+  stock: zod.string().transform(val => val === "true" || val === "1"),
   imagen: zod.string().min(1, "La imagen es obligatoria"),
 });
 
 const validarVideojuego = (req, res, next) => {
   try {
-    VideojuegoCrear.parse(req.body);
+    if (req.file) {
+      req.body.imagen = req.file.originalname;
+    } else {
+      req.body.imagen = "";
+    }
+
+    const parsed = VideojuegoCrear.parse(req.body);
+    req.body = parsed;
+
     next();
+
   } catch (error) {
     console.log(error);
-    res.status(400).send({ message: error.message });
+    res.status(400).send({ message: error.errors });
   }
 };
 

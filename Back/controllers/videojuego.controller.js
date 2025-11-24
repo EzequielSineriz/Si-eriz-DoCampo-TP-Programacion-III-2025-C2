@@ -10,7 +10,7 @@ const crearVideojuego = async (req, res) => {
     const descripcion = body.descripcion;
     const precio = body.precio;
     const stock = body.stock;
-    const imagen = body.imagen;
+    const imagen = req.file ? req.file.originalname : null;
 
 
     // const { nombre, descripcion, precio, stock, imagen} = req.body;
@@ -21,7 +21,7 @@ const crearVideojuego = async (req, res) => {
       descripcion: descripcion,
       precio: precio,
       stock: stock,
-      imagen: imagen,
+      imagen: "/" + imagen,
     });
     
     // 3. Dar respuesta.
