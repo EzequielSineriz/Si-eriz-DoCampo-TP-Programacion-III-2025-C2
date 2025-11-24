@@ -26,3 +26,19 @@ main {
   flex-direction: column;
   gap: 5px
 }
+
+#boton-actualizar {
+  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  font-size: 18px;
+}
+
+#boton-alta {
+  margin-top: 20px;
+  width: 150px;
+  height: 40px;
+  font-size: 18px;
+}
+
+

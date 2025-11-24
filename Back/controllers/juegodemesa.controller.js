@@ -50,25 +50,20 @@ const traerJuegoDeMesaPorId = async (req, res) => {
 };
 
 const actualizarJuegoDeMesa = async (req, res) => {
-    try {
-    const { nombre, descripcion, precio, stock, imagen} = req.body;
-    const juego = await JuegoDeMesa.findByPk(req.params.id);
+  const { id } = req.params;
+  const juego = await JuegoDeMesa.findByPk(id);
+  if (!juego){
+    return res.status(404).json({ error: "Juego no encontrado" })};
 
-    await juego.update(
-      {
-        nombre: nombre,
-        descripcion: descripcion,
-        stock: stock,
-        precio: precio,
-        imagen: imagen,
-      }
-    );
-
-    res.status(200).send(juego);
-  } catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Error interno" });
+  if (req.file) {
+    juego.imagen = "/" + req.file.originalname;
   }
+
+  Object.assign(juego, req.body);
+
+  await juego.save();
+
+  res.json({ message: "Actualizado: ", juego });
 };
 
 const eliminarJuegoDeMesa = async (req, res) => {

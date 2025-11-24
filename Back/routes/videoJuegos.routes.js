@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const { validarVideojuego, validarVideojuegoId } =
+const { validarVideojuego, validarVideojuegoId , validarVideojuegoPUT} =
   require("../middleware/videojuegos.middleware.js");
 
 // POST
@@ -33,7 +33,7 @@ router.get("/", traerVideojuegos);
 router.get("/:id", validarVideojuegoId, traerVideojuegosPorId);
 
 // PUT
-router.put("/:id", validarVideojuegoId, validarVideojuego, actualizarVideojuego);
+router.put("/:id", upload.single("imagen"), validarVideojuegoId, validarVideojuegoPUT, actualizarVideojuego);
 
 // DELETE
 router.delete("/:id", validarVideojuegoId, eliminarVideojuego);

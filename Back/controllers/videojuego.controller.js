@@ -55,27 +55,21 @@ const traerVideojuegosPorId = async (req, res) => {
 };
 
 const actualizarVideojuego = async (req, res) => {
-    try {
-    const { nombre, descripcion, precio, stock, imagen} = req.body;
-    const videojuego = await Videojuego.findByPk(req.params.id);
+  const { id } = req.params;
+  const juego = await Videojuego.findByPk(id);
+  if (!juego){
+    return res.status(404).json({ error: "Juego no encontrado" })};
 
-    await videojuego.update(
-      {
-        nombre: nombre,
-        descripcion: descripcion,
-        stock: stock,
-        precio: precio,
-        imagen: imagen,
-      },
-    );
+  if (req.file) {
+    juego.imagen = "/" + req.file.originalname;
+  }
 
-    res.status(200).send(videojuego);
-  } 
-  
-  catch (error) {
-    console.log(error);
-    res.status(500).send({ message: "Error interno" });
-  }};
+  Object.assign(juego, req.body);
+
+  await juego.save();
+
+  res.json({ message: "Actualizado: ", juego });
+};
 
 const eliminarVideojuego = async (req, res) => {
     try {
