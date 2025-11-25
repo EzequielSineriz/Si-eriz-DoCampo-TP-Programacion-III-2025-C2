@@ -41,4 +41,31 @@ main {
   font-size: 18px;
 }
 
+#id-input {
+  field-sizing: content;
+}
 
+#precio-input {
+  field-sizing: content;
+}
+
+#imagen-input {
+  width: 300px;
+}
+
+#descripcion-input {
+  width: 400px;
+  height: 100px;
+}
+
+#tipo-input {
+  width: 150px;
+}
+
+#stock-input {
+  width: 140px;
+}
+
+#nombre-input {
+  width: 200px;
+}
