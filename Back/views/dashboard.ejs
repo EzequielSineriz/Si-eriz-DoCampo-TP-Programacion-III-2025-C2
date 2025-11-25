@@ -80,7 +80,7 @@
             <div class="card shadow-sm h-100">
 
 
-                <% if (v.stock === 0) { %>
+                <% if (!v.stock) { %>
                   <span class="badge-stock">SIN STOCK</span>
                 <% } %>
 
@@ -139,7 +139,7 @@
             <div class="card shadow-sm h-100">
 
 
-              <% if (j.stock) { %>
+              <% if (!j.stock) { %>
                 <span class="badge-stock">SIN STOCK</span>
               <% } %>
 
