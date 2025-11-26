@@ -20,6 +20,8 @@ async function cargarDatos(categoria, id) {
         const item = jsonDatos.find(i => i.id == id);
         console.log('Item:', item);
 
+        console.log('Nombre:', item.nombre);   
+        document.getElementById('actualizacion-de').textContent = `Actualizando: ${item.nombre}`;   
         document.getElementById('nombre-input').value = item.nombre;
         document.getElementById('descripcion-input').value = item.descripcion;
         document.getElementById('precio-input').value = item.precio;
@@ -80,5 +82,6 @@ document.getElementById('boton-actualizar').addEventListener('click', async () =
 }
 
 );
+
 
 cargarDatos(categoria, id);
