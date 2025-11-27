@@ -73,11 +73,23 @@ document.getElementById('boton-actualizar').addEventListener('click', async () =
         });
         const respuesta = await res.json();
         console.log(respuesta);
-        window.location.href = "/admin";
+
+
+        swal.fire({
+            icon: "success",
+            title: "Éxito",
+            text: `${nombre} actualizado correctamente`,
+        }).then(() => {window.location.href = "/admin";});
+
     }   
     
     catch (error) {
         console.error("Error:", error);
+        swal.fire({
+            icon: "error",
+            title: "Error Interno",
+            text: "No se puedieron actualizar los datos",
+        });
     }
 }
 

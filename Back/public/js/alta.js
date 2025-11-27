@@ -15,10 +15,10 @@ document.getElementById('boton-alta').addEventListener('click', async () => {
     const nombre = document.getElementById('nombre-input').value;
     const descripcion = document.getElementById('descripcion-input').value;
     let precio = document.getElementById('precio-input').value;
-    let stock = document.getElementById('stock-input').value;
+    let stock = parseInt(document.getElementById('stock-input').value);
     const imagen = document.getElementById('imagen-input').files[0];
 
-    if (!nombre || !descripcion || !precio || !stock || !imagen) {
+    if (!nombre || !descripcion || !precio || !imagen || isNaN(stock)) {
         swal.fire({
             icon: "error",
             title: "Error",
@@ -45,6 +45,7 @@ document.getElementById('boton-alta').addEventListener('click', async () => {
     console.log('Stock:', stock);
     console.log('Tipo:', tipo);
 
+    console.log("STOCK:", stock);
     const categoria = (tipo === "videojuego") ? "videojuegos" : "juegosdemesa";
 
     
@@ -55,13 +56,23 @@ document.getElementById('boton-alta').addEventListener('click', async () => {
         });
 
         const respuesta = await res.json();
-        console.log(res);
+        console.log(respuesta);
+
+        swal.fire({
+            icon: "success",
+            title: "Éxito",
+            text: `${nombre} creado correctamente`,
+        }).then(() => {window.location.href = "/admin"});
+
     }
 
     catch (error) {
         console.error('Error al crear el producto:', error);
+        swal.fire({
+            icon: "error",
+            title: "Error Interno",
+            text: "No se pudo agregar el producto",
+        });
     }
-
-    window.location.href = '/admin';
 }
 );
