@@ -4,7 +4,6 @@ require("dotenv").config(); // <- añadido
 const sequelize = require("./db/sequelize");
 const path = require("path"); // 👈 Importar el modulo path
 const app = express();
-const bcrypt = require("bcrypt");
 app.use(express.urlencoded({ extended: true })); //  necesario para leer los datos del form
 require("./models/asociaciones.js");
 require("./models/admin"); // importante
@@ -31,14 +30,7 @@ app.use(cors());
 app.use(express.json());
 
 
- //preguntar por la carpeta Front
-//app.use(express.static(path.join(__dirname, "../Front")));
-
-//app.get("/", (req, res) => {
-//  res.sendFile(path.join(__dirname, "../Front/bienvenido/bienvenido.html"));
-//});
-
-// Rutas
+//                            === Rutas ===
 const videojuegosRoutes = require("./routes/videoJuegos.routes.js");
 app.use("/videojuegos", videojuegosRoutes);
 const juegosDeMesaRoutes = require("./routes/juegoDeMesa.routes.js");
@@ -66,11 +58,7 @@ app.get("/admin", async (req, res) => {
 
 
 
-
-
-
-
-// Sincronizar base de datos y levantar servidor
+//                   === Sincronizar base de datos y levantar servidor ===
 sequelize.sync().then(() => {
   console.log("Base de datos sincronizada");
   app.listen(3000, () => console.log(" Servidor corriendo en http://localhost:3000"));
