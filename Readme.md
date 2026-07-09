@@ -1,4 +1,4 @@
-# DualPlay – Plataforma Full-Stack de Venta de Videojuegos y Juegos de Mesa<h1>
+# DualPlay – Plataforma Full-Stack de Venta de Videojuegos y Juegos de Mesa
 
 DualPlay es un proyecto full-stack desarrollado como Trabajo Final de la asignatura Programación III.
 La aplicación combina un backend en Node.js/Express con un frontend estático y un panel administrativo con EJS para la gestión completa del catálogo de productos.
