@@ -1,74 +1,14 @@
-# 🎮🧩 DualPlay – Plataforma Full-Stack de Venta de Videojuegos y Juegos de Mesa<h1>
-
+# DualPlay – Plataforma Full-Stack de Venta de Videojuegos y Juegos de Mesa<h1>
 
 DualPlay es un proyecto full-stack desarrollado como Trabajo Final de la asignatura Programación III.
 La aplicación combina un backend en Node.js/Express con un frontend estático y un panel administrativo con EJS para la gestión completa del catálogo de productos.
 
 El objetivo es construir un entorno donde la empresa ficticia DualPlay pueda administrar videojuegos y juegos de mesa, gestionar ventas, y exhibir un catálogo público para los clientes.
 
-## 📁 Estructura del Proyecto
-
 El proyecto está dividido en dos grandes áreas: Back y Front.
 
-### 🔵 Backend (Node + Express + Sequelize)
-```
-📁Back
-├── 📁config
-│   └── multer.config.js
-├── 📁controllers
-│   ├── juegodemesa.controller.js
-│   ├── productos.controller.js
-│   ├── ventas.controller.js
-│   └── videojuego.controller.js
-├── 📁db
-│   ├── database.sqlite
-│   └── sequelize.js
-├── 📁edicion
-│   ├── editarProducto.html
-│   └── nuevoProducto.html
-├── 📁middleware
-│   ├── juegosdemesa.middleware.js
-│   └── videojuegos.middleware.js
-├── 📁models
-│   ├── admin.js
-│   ├── asociaciones.js
-│   ├── juegoDeMesa.js
-│   ├── productos.js
-│   ├── ventas.js
-│   ├── ventasProductos.js
-│   └── videoJuegos.js
-├── 📁public
-│   ├── 📁css
-│   ├── 📁favicon
-│   └── 📁js
-├── 📁routes
-│   ├── juegoDeMesa.routes.js
-│   ├── productos.routes.js
-│   ├── ventas.routes.js
-│   └── videoJuegos.routes.js
-└── 📁views
-    ├── altaProducto.ejs
-    ├── dashboard.ejs
-    ├── editarProducto.ejs
-    └── login.ejs
-
-```
-  
-### 🟠 Frontend Público
-```
-📁Front
-├── 📁Bienvenido
-├── 📁Carrito
-├── 📁img
-├── 📁JuegosDeMesa
-├── 📁Productos
-├── 📁Ticket
-└── 📁Videojuegos
-```
-El frontend se sirve como archivos estáticos desde el servidor, permitiendo independencia del panel admin.
-
-# ⚙️ Tecnologías Utilizadas
-## 🟦 Backend
+# Tecnologías Utilizadas
+## Backend
 
 + Node.js
 
@@ -87,7 +27,7 @@ El frontend se sirve como archivos estáticos desde el servidor, permitiendo ind
 + Zod (validaciones)
 
 
-## 🟨 Frontend
+## Frontend
 
 + HTML5
 
@@ -97,7 +37,7 @@ El frontend se sirve como archivos estáticos desde el servidor, permitiendo ind
 
 + Integración con APIs del backend
 
-## 🔐 Panel Administrativo (SSR con EJS)
+## Panel Administrativo (SSR con EJS)
 
 El administrador puede:
 
@@ -110,7 +50,7 @@ El administrador puede:
 
 Las vistas EJS permiten un backend seguro, controlado y rápido de renderizar.
 
-## 🌐 Frontend Público
+## Frontend Público
 
 El cliente puede:
 
@@ -121,7 +61,7 @@ El cliente puede:
 - Descargar PDF del ticket (html2pdf.js)
 
 
-## 🏗️ Relación entre Entidades
+## Relación entre Entidades
 
 #### Videojuegos y Juegos de Mesa
 
@@ -141,7 +81,7 @@ Son entidades independientes, cada una con su propia tabla.
 
 * Relación muchos a muchos entre Ventas y Productos.
 
-## 📦 Instalación y ejecución
+## Instalación y ejecución
 
 ```bash
 git clone <repo>
@@ -156,17 +96,7 @@ npm start
 * ``` ADMIN_USER=admin ```
 * ``` ADMIN_PASS=1234 ```
 
-## 🚀 Mejoras futuras 
-
-* Token JWT para el login admin
-
-* Panel de gráficas de ventas
-
-* Sistema de usuarios clientes registrados
-
-* Pasarela de pagos
-
-## 👨‍💻 Autores
+## Autores
 
 ### Ezequiel Siñeriz
 ### Ezequiel Do Campo
